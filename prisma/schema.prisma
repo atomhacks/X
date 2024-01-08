@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(COMPETITOR)
+  formInfo      FormInfo?
+
+  teamId String?
+  team   Team?   @relation(fields: [teamId], references: [id])
+}
+
+model Team {
+  id         String      @id @default(cuid())
+  name       String      @unique
+  image      String?
+  users      User[]
+  submission Submission?
+}
+
+model Submission {
+  id          String      @id @default(cuid())
+  name        String      @unique
+  description String
+  media       MediaLink[]
+  icon        String      @default("https://static.wikia.nocookie.net/roblox/images/6/66/Content_Deleted.png")
+  tracks      Track[]
+  public      Boolean     @default(false)
+  submitted   Boolean     @default(false)
+  srcLink     String      @default("")
+  videoLink   String      @default("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+  upVotes     Int         @default(0)
+  downVotes   Int         @default(0)
+  views       Int         @default(0)
+
+  teamId String @unique
+  team   Team   @relation(fields: [teamId], references: [id])
+}
+
+model MediaLink {
+  id  String @id @default(cuid())
+  url String
+
+  submission   Submission @relation(fields: [submissionId], references: [id])
+  submissionId String
+}
+
+model Track {
+  type       TrackType    @id
+  submission Submission[]
+}
+
+model FormInfo {
+  id         String     @id @default(cuid())
+  osis       String
+  year       Int
+  experience Experience
+
+  userId String @unique
+  user   User?  @relation(fields: [userId], references: [id])
+}
+
+enum TrackType {
+  GENERAL
+  BEGINNER
+}
+
+enum Experience {
+  NONE
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum Role {
+  COMPETITOR
+  ADMIN
+}
