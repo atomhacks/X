@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import React from 'react';
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Navbar from './components/Navbar';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      {/* Puting the Navbar here allows it to be replicated across all pages, including
+      the main page and the gallery page. Think of this as a template for all pages.*/}
+      <body className={inter.className}>
+      <Navbar />
+        {children}</body>
     </html>
   )
 }
