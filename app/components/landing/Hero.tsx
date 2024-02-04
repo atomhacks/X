@@ -1,12 +1,10 @@
 "use client"
 
-import { Lexend } from "next/font/google";
 import { useEffect, useState } from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 import Logo from "./Logo";
 
-const lexend = Lexend({ subsets: ['latin'] });
 
 export default function Hero() {
   const [value, setValue] = useState(0);
@@ -27,7 +25,7 @@ export default function Hero() {
   const dimColorString = `hsl(${value}, 96%, 40%)`;
 
   return (
-    <div className={`${lexend.className} min-h-screen`}>
+    <div className='min-h-screen'>
       <div className="flex flex-col items-center justify-center pt-0 p-8">
         <Logo />
         <h1 className='underline underline-offset-8 relative bottom-10' style={{ textDecorationColor: colorString }}>
