@@ -1,8 +1,13 @@
-import NavButton from './NavButton'
+import NavButton from "./NavButton";
 
 export default function Navbar() {
   return (
     <div className="flex min-w-full items-center justify-end gap-x-4 p-4">
+      <div className="mr-auto">
+        <NavButton href="/dashboard" lineColor="hover:decoration-green-400">
+          Dashboard
+        </NavButton>
+      </div>
       <NavButton href="/" lineColor="hover:decoration-green-400">
         Home
       </NavButton>
@@ -16,5 +21,5 @@ export default function Navbar() {
         Gallery
       </NavButton>
     </div>
-  )
+  );
 }

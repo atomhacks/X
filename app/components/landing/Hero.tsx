@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 import Logo from "./Logo";
-
+import SignIn from "../SignIn";
 
 export default function Hero() {
   const [value, setValue] = useState(0);
@@ -25,19 +25,26 @@ export default function Hero() {
   const dimColorString = `hsl(${value}, 96%, 40%)`;
 
   return (
-    <div className='min-h-screen'>
-      <div className="flex flex-col items-center justify-center pt-0 p-8">
+    <div className="min-h-screen">
+      <div className="flex flex-col items-center justify-center p-8 pt-0">
         <Logo />
-        <h1 className='underline underline-offset-8 relative bottom-10' style={{ textDecorationColor: colorString }}>
+        <h1
+          className="relative bottom-10 text-center underline underline-offset-8"
+          style={{ textDecorationColor: colorString }}
+        >
           AtomHacks <span style={{ color: colorString }}>X</span>
         </h1>
-        <h2 className="relative bottom-4">
-          Bronx Science's <span style={{ color: colorString }}>10<sup>th</sup></span> Annual Hackathon
+        <h2 className="relative bottom-4 text-center">
+          Bronx Science's{" "}
+          <span style={{ color: colorString }}>
+            10<sup>th</sup>
+          </span>{" "}
+          Annual Hackathon
         </h2>
-        <button className="m-8 py-3 px-8 rounded-full text-xl" style={{ backgroundColor: dimColorString }}>
-          Register <FaLongArrowAltRight className="align-middle inline" />
-        </button>
+        <SignIn provider="" callbackUrl="/dashboard" className="m-8 rounded-full px-8 py-3 text-xl" style={{ backgroundColor: dimColorString }}>
+          Register <FaLongArrowAltRight className="inline align-middle" />
+        </SignIn>
       </div>
     </div>
-  )
+  );
 }
