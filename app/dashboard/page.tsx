@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions, getUser } from "@/lib/server";
 import { CheckCircleIcon, ExclamationCircleIcon, LinkIcon } from "@heroicons/react/24/outline";
-import SignIn from "../components/SignIn";
 import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
@@ -34,12 +33,8 @@ export default async function Dashboard() {
             <CheckCircleIcon />
           </div>
         </div>
-        <SignIn
-          provider="discord"
-          callbackUrl="/dashboard"
-          className={`flex w-2/5 flex-row items-center rounded-lg border-2 bg-transparent p-4 md:w-4/5 ${
-            !user.accounts.find((account) => account.provider === "discord") ? "border-red-500" : "border-green-500"
-          }`}
+        <div
+          className="flex w-2/5 flex-row items-center rounded-lg border-2 bg-transparent p-4 md:w-4/5 border-red-500"
         >
           {" "}
           <div className="h-10 w-10 object-contain md:h-5 md:w-5">
@@ -48,14 +43,9 @@ export default async function Dashboard() {
           </div>
           <h1 className="mx-4 grow text-left text-2xl md:text-sm">Link Discord account</h1>
           <div className="h-10 w-10 object-contain md:h-5 md:w-5">
-            {" "}
-            {!user.accounts.find((account) => account.provider === "discord") ? (
               <ExclamationCircleIcon />
-            ) : (
-              <CheckCircleIcon />
-            )}
           </div>
-        </SignIn>
+        </div>
       </div>
     </>
   );
