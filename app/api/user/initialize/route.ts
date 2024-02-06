@@ -2,6 +2,7 @@ import { wrongMethod, unauthorized, missingFields, filterBodyAndValidate, authOp
 
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 
 const requiredFields = ["name", "osis", "experience", "year"] as const;
 const fields = [...requiredFields, "hasTeam", "shouldMatchTeam", "teamMembers"] as const;
@@ -42,5 +43,5 @@ export async function POST(req: Request) {
     },
   });
   console.log(updateUser);
-  return Response.json({ updateUser }, { status: 201 });
+  return NextResponse.json({ updateUser }, { status: 201 });
 }

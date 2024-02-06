@@ -3,7 +3,7 @@
 import { Prisma } from "@prisma/client";
 import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "./prisma";
 import { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -71,12 +71,12 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-export const wrongMethod = () => Response.json({ message: "Method Not Allowed" }, { status: 405 });
-export const unauthorized = () => Response.json({ message: "Unauthorized" }, { status: 401 });
-export const missingFields = () => Response.json({ message: "Bad Request - Missing required fields" }, { status: 400 });
-export const duplicateEntry = () => Response.json({ message: "Conflict" }, { status: 409 });
+export const wrongMethod = () => NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
+export const unauthorized = () => NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+export const missingFields = () => NextResponse.json({ message: "Bad Request - Missing required fields" }, { status: 400 });
+export const duplicateEntry = () => NextResponse.json({ message: "Conflict" }, { status: 409 });
 // this should probably be a dedicated page
-export const notFound = () => Response.json({ message: "Not Found" }, { status: 404 });
+export const notFound = () => NextResponse.json({ message: "Not Found" }, { status: 404 });
 
 // only to be used in reading, for updating just call prisma manually
 type GetUserOverloads = {
