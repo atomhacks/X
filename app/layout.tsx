@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Bronx Science's 10th Annual Hackathon",
 };
 
-export default function RootLayout({ children, session }: { children: React.ReactNode; session: Session }) {
+export default function RootLayout({ children, session }: { children: React.ReactNode; session?: Session }) {
   return (
     <html lang="en">
       {/* Puting the Navbar here allows it to be replicated across all pages, including
