@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { Lexend_Deca } from "next/font/google";
 import "./globals.css";
 import { Session } from "next-auth";
@@ -11,11 +11,7 @@ export const metadata: Metadata = {
   description: "Bronx Science's 10th Annual Hackathon",
 };
 
-type Props = {
-  session: Session;
-};
-
-const RootLayout: React.FC<PropsWithChildren<Props>> = ({ children, session }) => {
+export default function RootLayout({ children, session }: { children: React.ReactNode; session: Session }) {
   return (
     <html lang="en">
       {/* Puting the Navbar here allows it to be replicated across all pages, including
@@ -25,6 +21,4 @@ const RootLayout: React.FC<PropsWithChildren<Props>> = ({ children, session }) =
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}
