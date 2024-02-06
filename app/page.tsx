@@ -14,11 +14,13 @@
 import About from './components/landing/About'
 import Sponsors from './components/landing/Sponsors'
 import Hero from './components/landing/Hero';
+import Navbar from './components/Navbar';
 
 
 export default function Home() {
   return (
     <>
+      <Navbar />
       <main>
         {/*
         Try right clicking on About and Sponsors and clicking Go To Definition

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 import Logo from "./Logo";
-import SignIn from "../SignIn";
+import Link from "next/link";
 
 export default function Hero() {
   const [value, setValue] = useState(0);
@@ -41,9 +41,13 @@ export default function Hero() {
           </span>{" "}
           Annual Hackathon
         </h2>
-        <SignIn provider="" callbackUrl="/dashboard" className="m-8 rounded-full px-8 py-3 text-xl" style={{ backgroundColor: dimColorString }}>
+        <Link
+          href="/register"
+          className="m-8 rounded-full px-8 py-3 text-xl"
+          style={{ backgroundColor: dimColorString }}
+        >
           Register <FaLongArrowAltRight className="inline align-middle" />
-        </SignIn>
+        </Link>
       </div>
     </div>
   );
