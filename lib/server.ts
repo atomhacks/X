@@ -96,11 +96,7 @@ type GetUserOverloads = {
   }> | null>;
 };
 
-export const getUser: GetUserOverloads = async (req) => {
-  const id = typeof req == "string" ? req : (await getToken({ req }))?.sub;
-  if (!id) {
-    return null;
-  }
+export const getUser = async (id: string) => {
   const user = await prisma.user.findUnique({
     where: {
       id: id,
