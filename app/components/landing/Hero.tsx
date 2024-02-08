@@ -41,6 +41,11 @@ export default function Hero() {
           </span>{" "}
           Annual Hackathon
         </h2>
+        <h2 className="relative bottom-4 text-center">
+          <span style={{ color: colorString }}>
+            March 2nd, 2024
+          </span>
+        </h2>
         <Link
           href="/register"
           className="m-8 rounded-full px-8 py-3 text-xl"

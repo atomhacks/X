@@ -48,6 +48,12 @@
   }
 }
 
+html {
+  scroll-snap-type: y proximity;
+  overflow-y: scroll;
+  scroll-snap-stop: normal;
+}
+
 body {
   height: 100%;
   margin: 0;

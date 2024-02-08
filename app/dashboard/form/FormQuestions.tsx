@@ -13,13 +13,18 @@ export default function FormQuestions() {
   const [year, setYear] = useState("");
   const [confirmation, setConfirmation] = useState("NO");
   const [submitting, setSubmitting] = useState(false);
+  const [hasTeam, setHasTeam] = useState(null);
+  const [shouldMatchTeam, setMatchTeam] = useState(null);
+  const [potentialMembers, setPotentialMembers] = useState("");
+  const [shirtSize, setShirtSize] = useState("");
   const experienceLevels = ["None", "Beginner", "Intermediate", "Advanced"];
   const graduationYears = ["2024", "2025", "2026", "2027"];
+  const sizes = ["Small", "Medium", "Large", "XL"];
   const confirmations = ["YES", "NO"];
 
   // We gotta use Formik or something
   const isValid = () => {
-    return name.length > 1 && experience && !isNaN(+year) && confirmation == "YES" && osis.length == 9 && !isNaN(+osis);
+    return name.length > 1 && experience && !isNaN(+year) && confirmation == "YES" && osis.length == 9 && !isNaN(+osis) && hasTeam != null && (hasTeam == false ? shouldMatchTeam != null : true) && shirtSize != "";
   };
 
   // to be updated
@@ -34,7 +39,12 @@ export default function FormQuestions() {
       osis,
       experience,
       year,
+      hasTeam,
+      shouldMatchTeam: hasTeam ? null : shouldMatchTeam,
+      potentialMembers: !hasTeam ? null: potentialMembers,
+      shirtSize,
     });
+    console.log(body);
     const res = await fetch("/api/user/initialize", {
       method: "POST",
       headers: {
@@ -155,6 +165,81 @@ export default function FormQuestions() {
                   value={+year}
                 >
                   <span>{year}</span>
+                </RadioGroup.Option>
+              ))}
+            </div>
+          </RadioGroup>
+          <h3>The following questions related to teams are non-binding. You can decide your final team on the day of the event. We just want to get a general sense of how many people need a team.</h3>
+          <RadioGroup value={hasTeam} onChange={setHasTeam}>
+            <RadioGroup.Label>
+              <p className="mb-2 text-neutral-400">Do you already have a team? (4 members max, including yourself)</p>
+            </RadioGroup.Label>
+            <div className="space-y-2">
+              {confirmations.map((option, index) => (
+                <RadioGroup.Option
+                  className={({ checked }) =>
+                    `${checked ? "bg-green-600" : "bg-ocean-400"} w-2/5 cursor-pointer rounded-lg px-4 py-2 shadow-md`
+                  }
+                  key={index}
+                  id={option.toLowerCase()}
+                  value={option == "YES" ? true : false}
+                >
+                  <span>{option}</span>
+                </RadioGroup.Option>
+              ))}
+            </div>
+          </RadioGroup>
+          {hasTeam != null && hasTeam ? (
+            <>
+              <label className="block text-base text-neutral-400">
+                Potential Team Members:
+              </label>
+              <input
+                className="bg-ocean-400 mb-4 mt-1 block rounded-md p-2 text-md shadow-lg focus:border-green-600 focus:outline-none focus:ring focus:ring-green-600"
+                type="text"
+                value={potentialMembers}
+                id="members"
+                name="members"
+                size={40}
+                onInput={(e) => setPotentialMembers((e.target as HTMLInputElement).value)}
+              />
+            </>
+          ) : (
+          <RadioGroup value={shouldMatchTeam} onChange={setMatchTeam}>
+            <RadioGroup.Label>
+              <p className="mb-2 text-neutral-400">Would you like us to match you with a team on the day of the event?</p>
+            </RadioGroup.Label>
+            <div className="space-y-2">
+              {confirmations.map((option, index) => (
+                <RadioGroup.Option
+                  className={({ checked }) =>
+                    `${checked ? "bg-green-600" : "bg-ocean-400"} w-2/5 cursor-pointer rounded-lg px-4 py-2 shadow-md`
+                  }
+                  key={index}
+                  id={option.toLowerCase()}
+                  value={option == "YES" ? true : false}
+                >
+                  <span>{option}</span>
+                </RadioGroup.Option>
+              ))}
+            </div>
+          </RadioGroup>
+          )}
+          <RadioGroup value={shirtSize} onChange={setShirtSize}>
+            <RadioGroup.Label>
+              <p className="mb-2 text-neutral-400">Preferred Shirt Size:</p>
+            </RadioGroup.Label>
+            <div className="space-y-2">
+              {sizes.map((size, index) => (
+                <RadioGroup.Option
+                  className={({ checked }) =>
+                    `${checked ? "bg-green-600" : "bg-ocean-400"} w-2/5 cursor-pointer rounded-lg px-4 py-2 shadow-md`
+                  }
+                  key={index}
+                  id={size.toLowerCase()}
+                  value={size.toUpperCase()}
+                >
+                  <span>{size}</span>
                 </RadioGroup.Option>
               ))}
             </div>

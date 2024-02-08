@@ -107,6 +107,7 @@ model FormInfo {
   year             Int
   experience       Experience
   hasTeam          Boolean
+  shouldMatchTeam  Boolean @default(false)
   potentialMembers String?
   shirtSize        ShirtSize
 

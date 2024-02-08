@@ -15,6 +15,7 @@ import About from './components/landing/About'
 import Sponsors from './components/landing/Sponsors'
 import Hero from './components/landing/Hero';
 import Navbar from './components/Navbar';
+import FAQ from './components/landing/Faq';
 
 
 export default function Home() {
@@ -30,6 +31,7 @@ export default function Home() {
       */}
         <Hero />
         <About />
+        <FAQ />
         <Sponsors />
       </main>
     </>
