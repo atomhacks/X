@@ -25,7 +25,7 @@ export default function Hero() {
   const dimColorString = `hsl(${value}, 96%, 40%)`;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[80vh]">
       <div className="flex flex-col items-center justify-center p-8 pt-0">
         <Logo />
         <h1

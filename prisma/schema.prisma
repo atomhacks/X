@@ -101,14 +101,24 @@ model Track {
 }
 
 model FormInfo {
-  id         String     @id @default(cuid())
-  name       String
-  osis       String
-  year       Int
-  experience Experience
+  id               String     @id @default(cuid())
+  name             String
+  osis             String
+  year             Int
+  experience       Experience
+  hasTeam          Boolean
+  potentialMembers String?
+  shirtSize        ShirtSize
 
   userId String @unique
   user   User?  @relation(fields: [userId], references: [id])
+}
+
+enum ShirtSize {
+  SMALL
+  MEDIUM
+  LARGE
+  XL
 }
 
 enum TrackType {
