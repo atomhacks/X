@@ -11,7 +11,8 @@
         nativeBuildInputs = [ pkgs.bashInteractive ];
         buildInputs = with pkgs; [
           nodePackages.prisma
-          nodePackages.yarn
+          nodePackages.pnpm
+          nodePackages.typescript-language-server
           nodejs_20
         ];
         shellHook = with pkgs; ''
