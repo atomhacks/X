@@ -14,7 +14,7 @@ export default function SubmitButton({
       className={
         className
           ? className
-          : "inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white transition duration-200 hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-green-600 disabled:opacity-50"
+          : "inline-flex justify-center rounded-md border border-transparent bg-green-600/80 px-4 py-2 text-sm font-medium text-white transition duration-200 hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-green-600 disabled:opacity-50"
       }
       {...props}
     >

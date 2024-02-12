@@ -5,7 +5,7 @@ export default function Navbar() {
   const routes = [
     {
       name: "Team",
-      path: "/dashboard/team/create",
+      path: "/dashboard/team/manage",
       color: "hover:decoration-purple-400"
     },
     {
@@ -24,8 +24,11 @@ export default function Navbar() {
   return (
     <div className="sticky top-0 z-50 flex min-w-full items-center justify-end gap-x-4 p-4">
       <SignOut />
-      <NavButton className="mr-auto" href="/" lineColor="hover:decoration-green-400">
+      <NavButton href="/" lineColor="hover:decoration-green-400">
         Back to Home
+      </NavButton>
+      <NavButton className="mr-auto" href="/dashboard" lineColor="hover:decoration-green-400">
+        Dashboard
       </NavButton>
       {routes.map((route, index) => (
         <NavButton key={index} href={route.path} lineColor={route.color}>

@@ -1,5 +1,4 @@
 import React from "react";
-import SignOut from "./components/SignOut";
 import DashNav from "./components/DashNav";
 
 export const metadata = {

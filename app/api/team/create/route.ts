@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 const requiredFields = ["name", "users"] as const;
 const fields = [...requiredFields] as const;
 
-export default async function POST(req: Request) {
+export async function POST(req: Request) {
   if (req.method != "POST") {
     return wrongMethod();
   }
@@ -19,6 +19,10 @@ export default async function POST(req: Request) {
   let body = filterBodyAndValidate(await req.json(), fields, requiredFields);
   if (!body) {
     return missingFields();
+  }
+
+  if (body.users.length > 3) {
+    return NextResponse.json({ message: "Team limit exceeded" }, { status: 409 });
   }
 
   const { users: ids, ...restOfBody } = body;

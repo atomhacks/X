@@ -2,7 +2,7 @@ import { authOptions, getUser, getUserFromRequest, unauthorized, wrongMethod } f
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export default async function GET(req: Request) {
+export async function GET(req: Request) {
   if (req.method != "GET") {
     wrongMethod();
   }

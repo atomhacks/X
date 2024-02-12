@@ -155,9 +155,6 @@ export const getSubmission = async (
   id?: string,
 ) => {
   const user = await getUserFromRequest();
-  if (!user) {
-    return null;
-  }
   // extremely common prisma W
   const submission = await prisma.submission.findFirst({
     where: {
@@ -170,7 +167,7 @@ export const getSubmission = async (
           team: {
             users: {
               some: {
-                id: user.id,
+                id: user?.id,
               },
             },
           },

@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 const fields = ["name", "description", "tracks"] as const;
 const req_fields = ["name", "description", "tracks"] as const;
 
-export default async function POST(req: Request) {
+export async function POST(req: Request) {
   if (req.method != "POST") {
     return wrongMethod();
   }
@@ -26,14 +26,26 @@ export default async function POST(req: Request) {
     return redirect("/dashboard/team/create")
   }
 
+  const { tracks, ...restOfBody } = body;
+
   try {
     const submission = await prisma.submission.create({
       data: {
-        ...body,
+        ...restOfBody,
+        tracks: {
+          connectOrCreate: tracks.map((track: string) => ({
+            where: {
+              type: track,
+            },
+            create: {
+              type: track,
+            },
+          }))
+        },
         team: {
           connect:
           {
-            id: user.teamId
+            id: user.teamId,
           },
         },
       },

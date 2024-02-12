@@ -1,9 +1,8 @@
-import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import prisma from "@/lib/prisma";
 import {
   duplicateEntry,
-  filterBodyAndValidate,
+  filterBody,
   getUserFromRequest,
   missingFields,
   redirect,
@@ -11,11 +10,10 @@ import {
 } from "@/lib/server";
 import { NextResponse } from 'next/server';
 
-const fields = ["name", "description", "tracks", "srcLink", "videoLink", "public", "icon"] as const;
-const req_fields = ["name", "description", "tracks"] as const;
+const fields = ["name", "description", "tracks", "srcLink", "videoLink", "public", "icon", "media"] as const;
 
-export default async function PUT(req: Request) {
-  if (req.method != "PUT") {
+export async function POST(req: Request) {
+  if (req.method != "POST") {
     return wrongMethod();
   }
 
@@ -24,8 +22,9 @@ export default async function PUT(req: Request) {
     return redirect("/api/auth/signin");
   }
 
+  const json = await req.json();
   // https://stackoverflow.com/questions/61190495/how-to-create-object-from-another-without-undefined-properties
-  const body = filterBodyAndValidate(await req.json(), fields, req_fields);
+  const body = filterBody(json, fields);
   if (!body) {
     return missingFields();
   }
@@ -37,6 +36,16 @@ export default async function PUT(req: Request) {
   if (!user.team.submission) {
     return redirect("/dashboard/submission/create");
   }
+
+  if (body.media) {
+    body.media = {
+      create: body.media.map((url: string) => ({
+        url
+      }))
+    }
+  }
+
+  console.log(body);
 
   // TODO: currently it reassigns image so it replaces images after editiing
   // instead of appending

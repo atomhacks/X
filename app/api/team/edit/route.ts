@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 const fields = ["name", "users"] as const;
 
-export default async function POST(req: Request) {
+export async function POST(req: Request) {
   if (req.method != "POST") {
     return wrongMethod();
   }
