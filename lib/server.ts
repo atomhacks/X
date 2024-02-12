@@ -5,7 +5,7 @@ import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "./prisma";
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, getServerSession } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { Adapter } from "next-auth/adapters";
 import DiscordProvider from "next-auth/providers/discord";
@@ -121,6 +121,14 @@ export const getUser = async (id: string) => {
   }
   return user;
 };
+
+export const getUserFromRequest = async () => {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user) {
+    return null;
+  }
+  return session.user;
+}
 
 export const getSignedUsers = async () => {
   return await prisma.user.findMany({
