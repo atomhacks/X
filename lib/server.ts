@@ -127,7 +127,7 @@ export const getUserFromRequest = async () => {
   if (!session || !session.user) {
     return null;
   }
-  return session.user;
+  return getUser(session.user.id);
 }
 
 export const getSignedUsers = async () => {
@@ -152,11 +152,10 @@ export const getAllSubmissions = async () => {
 };
 
 export const getSubmission = async (
-  req: NextRequest | NextApiRequest | GetServerSidePropsContext["req"] | string,
-  id: string,
+  id?: string,
 ) => {
-  const jwt = typeof req == "string" ? req : (await getToken({ req }))?.sub;
-  if (!jwt) {
+  const user = await getUserFromRequest();
+  if (!user) {
     return null;
   }
   // extremely common prisma W
@@ -171,7 +170,7 @@ export const getSubmission = async (
           team: {
             users: {
               some: {
-                id: jwt,
+                id: user.id,
               },
             },
           },
@@ -184,6 +183,7 @@ export const getSubmission = async (
           users: true,
         },
       },
+      media: true,
     },
   });
   if (!submission) {

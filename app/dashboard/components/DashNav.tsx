@@ -28,7 +28,7 @@ export default function Navbar() {
         Back to Home
       </NavButton>
       {routes.map((route, index) => (
-        <NavButton href={route.path} lineColor={route.color}>
+        <NavButton key={index} href={route.path} lineColor={route.color}>
           {route.name}
         </NavButton>
       ))}

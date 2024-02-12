@@ -13,6 +13,7 @@
           nodePackages.prisma
           nodePackages.pnpm
           nodePackages.typescript-language-server
+          nodePackages.vercel
           nodejs_20
         ];
         shellHook = with pkgs; ''
