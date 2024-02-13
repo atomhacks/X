@@ -37,7 +37,7 @@ function FlyCar(props: PropsWithChildren<Props>) {
 
   
   useEffect(() => {
-    const carAnimation = gsap.to(carRef.current, {
+    gsap.to(carRef.current, {
       x: props.movement || width + 200,
       duration: props.speed,
       ease: "none",
@@ -64,9 +64,9 @@ export default function flyingCars() {
 
   return (
     <div className="absolute overflow-hidden">
-      <FlyCar speed={12}/>
-      <FlyCar speed={14} rotation={-1} movement={-(width + 185)} margin={width - 20} />
-      <FlyCar speed={10}/>
+      <FlyCar speed={16}/>
+      <FlyCar speed={18} rotation={-1} movement={-(width + 185)} margin={width - 20} />
+      <FlyCar speed={14}/>
     </div>
   )
 }
