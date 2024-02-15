@@ -6,7 +6,7 @@ export default function Logo() {
     return (
         <div className="relative bottom-8">
             <div className="w-[28rem] h-[28rem] lg:w-[36rem] lg:h-[36rem]">
-                <Rive src="/rive/logo.riv" />
+                <Rive src="/rive/new_logo.riv" />
             </div>
         </div>
     )
