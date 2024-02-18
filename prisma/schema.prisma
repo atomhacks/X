@@ -83,14 +83,14 @@ model Submission {
   views       Int         @default(0)
 
   teamId String @unique
-  team   Team   @relation(fields: [teamId], references: [id])
+  team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
 }
 
 model MediaLink {
   id  String @id @default(cuid())
   url String
 
-  submission   Submission @relation(fields: [submissionId], references: [id])
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
   submissionId String
 }
 

@@ -151,44 +151,41 @@ export const getAllSubmissions = async () => {
   });
 };
 
-export const getSubmission = cache(
-  async (req: NextRequest | NextApiRequest | GetServerSidePropsContext["req"] | string, id: string) => {
-    const jwt = typeof req == "string" ? req : (await getToken({ req }))?.sub;
-    if (!jwt) {
-      return null;
-    }
-    const submission = await prisma.submission.findFirst({
-      where: {
-        id,
-        OR: [
-          {
-            public: true,
-          },
-          {
-            team: {
-              users: {
-                some: {
-                  id: jwt,
-                },
+export const getSubmission = cache(async (id?: string) => {
+  const user = await getUserFromRequest();
+  console.log(id);
+  const submission = await prisma.submission.findFirst({
+    where: {
+      id,
+      OR: [
+        {
+          public: true,
+        },
+        {
+          team: {
+            users: {
+              some: {
+                id: user?.id,
               },
             },
           },
-        ],
-      },
-      include: {
-        team: {
-          include: {
-            users: true,
-          },
+        },
+      ],
+    },
+    include: {
+      team: {
+        include: {
+          users: true,
         },
       },
-    });
-    if (!submission) {
-      return null;
-    }
-    return submission;
-  },
-);
+      media: true,
+    },
+  });
+  if (!submission) {
+    return null;
+  }
+  return submission;
+});
 
 export async function redirect(destination = "/") {
   return {
