@@ -1,5 +1,5 @@
-import NavButton from "@/app/components/NavButton";
-import SignOutButton from "./SignOutButton";
+import NavButton from "@/app/components/nav/NavButton";
+import SignOutButton from "../buttons/SignOutButton";
 
 export default function NavBarDash() {
   const routes = [

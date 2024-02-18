@@ -5,7 +5,7 @@ import { CheckIcon } from "@heroicons/react/24/outline";
 import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { FormEventHandler, Fragment, useState } from "react";
-import SubmitButton from "../../components/SubmitButton";
+import SubmitButton from "../../../components/buttons/SubmitButton";
 
 type Props = {
   users: User[];

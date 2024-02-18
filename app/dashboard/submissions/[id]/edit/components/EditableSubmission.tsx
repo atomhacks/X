@@ -5,7 +5,7 @@ import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
-import SubmitButton from "../../../../components/SubmitButton";
+import SubmitButton from "../../../../../components/buttons/SubmitButton";
 import { upload } from "@vercel/blob/client";
 
 export const revalidate = 0;

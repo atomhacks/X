@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/nav/NavBar";
 
 const photos_2022 = [
   "DSC_8260.JPG",

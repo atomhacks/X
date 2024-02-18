@@ -1,10 +1,10 @@
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app/components/Card";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/nav/NavBar";
 import { FormEventHandler, useState } from "react";
 import { signIn } from "next-auth/react";
-import Spinner from "../components/Spinner";
+import SubmitButton from "../components/buttons/SubmitButton";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -31,7 +31,7 @@ export default function Register() {
             </CardDescription>
             <CardDescription>
               Why the sign-up process? AtomHacks has an involved sign-up process as part of its custom submission
-              system. (and the DOE won't allow for "Sign in with Google")
+              system.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -50,12 +50,9 @@ export default function Register() {
                 onInput={(e) => setEmail((e.target as HTMLInputElement).value)}
                 autoComplete="email"
               />
-            <button
-              type="submit"
-              className={ "inline-flex justify-center rounded-md border border-transparent bg-green-600/80 px-4 py-2 text-sm font-medium text-white transition duration-200 hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-green-600 disabled:opacity-50"
-              }
-            >Submit
-            </button>
+              <SubmitButton type="submit" disabled={!isValid()}>
+                <p>Submit</p>
+              </SubmitButton>
             </form>
           </CardContent>
         </Card>

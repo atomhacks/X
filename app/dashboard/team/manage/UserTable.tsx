@@ -3,7 +3,7 @@
 import { Prisma, User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import SubmitButton from "../../components/SubmitButton";
+import SubmitButton from "../../../components/buttons/SubmitButton";
 import AddUsersModal from "./AddUsersModal";
 
 type Props = {

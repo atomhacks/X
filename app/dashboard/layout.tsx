@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarDash from "../components/NavBarDash";
+import NavBarDash from "../components/nav/NavBarDash";
 
 export const metadata = {
   title: "Dashboard",
@@ -7,7 +7,7 @@ export const metadata = {
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-screen overflow-auto bg-ocean-300">
+    <div className="h-screen overflow-auto">
       {}
       <NavBarDash />
       <div>{children}</div>

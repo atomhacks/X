@@ -39,10 +39,10 @@ function Section({ img, text }: { img: any; text: string }) {
 
   return (
     <div ref={ref} className="relative my-24 grid snap-center grid-cols-1 md:my-12 md:grid-cols-5 md:px-0">
-      <div className="relative px-4 md:col-span-3">
+      <div className="relative px-4 md:col-span-3 z-10">
         <Image priority={true} className="relative rounded-2xl shadow-2xl" src={img} alt="" />
       </div>
-      <div className="my-auto text-center md:col-span-2 md:my-4 md:text-right lg:ml-24">
+      <div className="my-auto text-center md:col-span-2 md:my-4 md:text-right lg:ml-24 z-0">
         <motion.p style={{ y }} className="border-r-8 border-green-500 px-8 py-3 text-xl md:text-base">
           {" "}
           {text}
