@@ -1,7 +1,7 @@
 "use client";
 
-import { Combobox, Dialog, Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline";
+import { Combobox, Dialog, Transition } from "@headlessui/react";
+import { CheckIcon } from "@heroicons/react/24/outline";
 import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { Dispatch, Fragment, SetStateAction, useState } from "react";

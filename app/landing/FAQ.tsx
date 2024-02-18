@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/app/components/Accordion";
 
 const qas = [
   {
@@ -49,7 +49,6 @@ const qas = [
 export default function FAQ() {
   return (
     <div id="faq" className="container mx-auto my-8 flex flex-col items-center justify-center gap-4">
-      {/* Notice the id property? This is what lets us route to the sponsors section from the navbar */}
       <h2 className="mr-auto px-4 py-6 text-5xl underline decoration-green-500 decoration-4 underline-offset-8">FAQ</h2>
       <Accordion type="single" collapsible className="w-3/5 text-lg">
         {qas.map((qa, i) => (

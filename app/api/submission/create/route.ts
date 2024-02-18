@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { duplicateEntry, filterBodyAndValidate, getUser, getUserFromRequest, missingFields, redirect, unauthorized, wrongMethod } from "@/lib/server";
+import { duplicateEntry, filterBodyAndValidate, getUserFromRequest, missingFields, redirect, wrongMethod } from "@/lib/server";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextResponse } from "next/server";
 

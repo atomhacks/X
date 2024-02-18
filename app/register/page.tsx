@@ -1,10 +1,10 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import Navbar from "../components/Navbar";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app/components/Card";
+import NavBar from "../components/NavBar";
 import { FormEventHandler, useState } from "react";
-import SubmitButton from "../dashboard/components/SubmitButton";
 import { signIn } from "next-auth/react";
+import Spinner from "../components/Spinner";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ export default function Register() {
 
   return (
     <>
-      <Navbar />
+      <NavBar />
       <div className="flex h-[80vh] items-center justify-center border-0">
         <Card className="bg-ocean-400 rounded-2xl rounded-xl border-none">
           <CardHeader>
@@ -31,7 +31,7 @@ export default function Register() {
             </CardDescription>
             <CardDescription>
               Why the sign-up process? AtomHacks has an involved sign-up process as part of its custom submission
-              system.
+              system. (and the DOE won't allow for "Sign in with Google")
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -50,9 +50,12 @@ export default function Register() {
                 onInput={(e) => setEmail((e.target as HTMLInputElement).value)}
                 autoComplete="email"
               />
-              <SubmitButton type="submit" disabled={!isValid()}>
-                <p>Submit</p>
-              </SubmitButton>
+            <button
+              type="submit"
+              className={ "inline-flex justify-center rounded-md border border-transparent bg-green-600/80 px-4 py-2 text-sm font-medium text-white transition duration-200 hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-green-600 disabled:opacity-50"
+              }
+            >Submit
+            </button>
             </form>
           </CardContent>
         </Card>

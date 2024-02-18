@@ -1,5 +1,5 @@
 import NavButton from "./NavButton";
-import NavMobile from "./NavMobile";
+import NavBarMobile from "./NavBarMobile";
 
 export const routes = [
   {
@@ -40,7 +40,14 @@ export const routes = [
   },
 ];
 
-export default function Navbar() {
+export interface Route {
+  title: string,
+  href: string,
+  color: string,
+  real: string,
+}
+
+export default function NavBar() {
   return (
     <>
       <div className="sticky top-0 z-50 hidden min-w-full gap-x-4 p-4 lg:flex lg:items-center lg:justify-end">
@@ -58,7 +65,7 @@ export default function Navbar() {
           ),
         )}
       </div>
-      <NavMobile />
+      <NavBarMobile />
     </>
   );
 }

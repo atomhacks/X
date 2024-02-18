@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaLongArrowAltRight } from "react-icons/fa";
-import FlyingCars from "../flyingCars"
 import Logo from "./Logo";
 import Link from "next/link";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 export default function Hero() {
   const [value, setValue] = useState(0);
@@ -26,7 +25,6 @@ export default function Hero() {
 
   return (
     <div className="min-h-[80vh]">
-      <FlyingCars />
       <div className="flex flex-col items-center justify-center p-8 pt-0">
         <Logo />
         <h1
@@ -52,7 +50,7 @@ export default function Hero() {
           className="m-8 rounded-full px-8 py-3 text-xl"
           style={{ backgroundColor: dimColorString }}
         >
-          Register <FaLongArrowAltRight className="inline align-middle" />
+          Register <ChevronRightIcon className="inline align-middle h-4"></ChevronRightIcon>
         </Link>
       </div>
     </div>

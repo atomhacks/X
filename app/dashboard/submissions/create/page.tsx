@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { getUser, getUserFromRequest } from "../../../../lib/server";
+import { getUserFromRequest } from "../../../../lib/server";
 import CreateSubmissionForm from "./Form";
 
 export default async function CreateSubmissionPage() {

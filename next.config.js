@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: [
+      "lh3.googleusercontent.com",
+      "atomhacks.nyc3.cdn.digitaloceanspaces.com",
+      "tr.rbxcdn.com",
+      "static.wikia.nocookie.net",
+    ],
     remotePatterns: [{ hostname: "*.public.blob.vercel-storage.com" }],
   },
 	eslint: {

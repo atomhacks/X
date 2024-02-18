@@ -1,4 +1,4 @@
-import { wrongMethod, unauthorized, missingFields, filterBodyAndValidate, authOptions, getUserFromRequest } from "@/lib/server";
+import { wrongMethod, unauthorized, missingFields, filterBodyAndValidate, getUserFromRequest } from "@/lib/server";
 
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";

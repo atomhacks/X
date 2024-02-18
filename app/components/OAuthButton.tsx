@@ -3,7 +3,7 @@
 import { signIn } from "next-auth/react";
 import React from "react";
 
-export default function SignIn({
+export default function OAuthButton({
   provider,
   callbackUrl,
   className,

@@ -1,7 +1,6 @@
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
-import { getUser, getUserFromRequest } from "@/lib/server";
+import { getUserFromRequest } from "@/lib/server";
 import CreateTeamForm from "./Form";
 
 export default async function CreateTeamPage() {

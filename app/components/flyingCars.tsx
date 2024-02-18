@@ -1,7 +1,8 @@
+/*
 "use client"
 
 import { useEffect, useState, useRef, PropsWithChildren } from 'react';
-import car from "@/public/car.svg" // Temporary image, a better one will be added soon
+import car from "@/public/car.svg"
 import { gsap } from "gsap";
 import Image from 'next/image'
 
@@ -70,6 +71,4 @@ export default function flyingCars() {
     </div>
   )
 }
-
-// Plan: Add a hover animation under the car and add a better car image as it isn't very dynamic
-
+*/

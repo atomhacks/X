@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import Navbar from "../components/Navbar";
+import NavBar from "../components/NavBar";
 
 const photos_2022 = [
   "DSC_8260.JPG",
@@ -66,7 +66,7 @@ export default function Gallery() {
 
   return (
     <>
-      <Navbar />
+      <NavBar />
       <main>
         <Transition appear show={selectedImage != null} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={() => setSelectedImage(null)}>

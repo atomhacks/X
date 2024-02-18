@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Hamburger from "hamburger-react";
-import { routes } from "./Navbar";
+import { routes } from "./NavBar";
 import NavButton from "./NavButton";
 
-export default function NavMobile() {
+export default function NavBarMobile() {
   const [isOpen, setOpen] = useState(false);
 
   return (

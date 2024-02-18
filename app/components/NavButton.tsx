@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { AnchorHTMLAttributes, PropsWithChildren } from 'react'
 
-
 type Props = {
   lineColor: string
   href: string

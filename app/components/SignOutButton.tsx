@@ -1,7 +1,9 @@
 "use client";
-import { signOut } from "next-auth/react";
 
-export default function SignOut(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+import { signOut } from "next-auth/react";
+import React from "react";
+
+export default function SignOutButton(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button onClick={() => signOut({ callbackUrl: "/" })} {...props}>
       <p

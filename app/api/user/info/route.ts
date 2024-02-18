@@ -1,5 +1,4 @@
-import { authOptions, getUser, getUserFromRequest, unauthorized, wrongMethod } from "@/lib/server";
-import { getServerSession } from "next-auth";
+import { getUserFromRequest, unauthorized, wrongMethod } from "@/lib/server";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {

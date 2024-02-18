@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* Utility functions for common server-side actions*/
 import { Prisma } from "@prisma/client";
 import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
@@ -10,6 +8,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { Adapter } from "next-auth/adapters";
 import DiscordProvider from "next-auth/providers/discord";
 import Email from "next-auth/providers/email";
+import { cache } from "react";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
@@ -32,8 +31,10 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account }) {
       if (!(account || user)) return false;
+
       console.log(user);
       console.log(account);
+
       return true;
     },
     session: ({ session, user }) => ({
@@ -75,10 +76,8 @@ export const wrongMethod = () => NextResponse.json({ message: "Method Not Allowe
 export const unauthorized = () => NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 export const missingFields = () => NextResponse.json({ message: "Bad Request - Missing required fields" }, { status: 400 });
 export const duplicateEntry = () => NextResponse.json({ message: "Conflict" }, { status: 409 });
-// this should probably be a dedicated page
 export const notFound = () => NextResponse.json({ message: "Not Found" }, { status: 404 });
 
-// only to be used in reading, for updating just call prisma manually
 type GetUserOverloads = {
   (req: NextRequest | NextApiRequest | GetServerSidePropsContext["req"]): Promise<Prisma.UserGetPayload<{
     include: {
@@ -116,6 +115,7 @@ export const getUser = async (id: string) => {
       formInfo: true,
     },
   });
+  console.log("hi")
   if (!user) {
     return null;
   }
@@ -130,7 +130,7 @@ export const getUserFromRequest = async () => {
   return getUser(session.user.id);
 }
 
-export const getSignedUsers = async () => {
+export const getSignedUsers = cache(async () => {
   return await prisma.user.findMany({
     where: { NOT: { formInfo: null } },
     include: {
@@ -141,7 +141,7 @@ export const getSignedUsers = async () => {
       },
     },
   });
-};
+});
 
 export const getAllSubmissions = async () => {
   return await prisma.submission.findMany({
@@ -151,43 +151,44 @@ export const getAllSubmissions = async () => {
   });
 };
 
-export const getSubmission = async (
-  id?: string,
-) => {
-  const user = await getUserFromRequest();
-  // extremely common prisma W
-  const submission = await prisma.submission.findFirst({
-    where: {
-      id,
-      OR: [
-        {
-          public: true,
-        },
-        {
-          team: {
-            users: {
-              some: {
-                id: user?.id,
+export const getSubmission = cache(
+  async (req: NextRequest | NextApiRequest | GetServerSidePropsContext["req"] | string, id: string) => {
+    const jwt = typeof req == "string" ? req : (await getToken({ req }))?.sub;
+    if (!jwt) {
+      return null;
+    }
+    const submission = await prisma.submission.findFirst({
+      where: {
+        id,
+        OR: [
+          {
+            public: true,
+          },
+          {
+            team: {
+              users: {
+                some: {
+                  id: jwt,
+                },
               },
             },
           },
-        },
-      ],
-    },
-    include: {
-      team: {
-        include: {
-          users: true,
+        ],
+      },
+      include: {
+        team: {
+          include: {
+            users: true,
+          },
         },
       },
-      media: true,
-    },
-  });
-  if (!submission) {
-    return null;
-  }
-  return submission;
-};
+    });
+    if (!submission) {
+      return null;
+    }
+    return submission;
+  },
+);
 
 export async function redirect(destination = "/") {
   return {

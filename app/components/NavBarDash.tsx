@@ -1,7 +1,7 @@
 import NavButton from "@/app/components/NavButton";
-import SignOut from "./SignOut";
+import SignOutButton from "./SignOutButton";
 
-export default function Navbar() {
+export default function NavBarDash() {
   const routes = [
     {
       name: "Team",
@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <div className="sticky top-0 z-50 flex min-w-full items-center justify-end gap-x-4 p-4">
-      <SignOut />
+      <SignOutButton />
       <NavButton href="/" lineColor="hover:decoration-green-400">
         Back to Home
       </NavButton>
