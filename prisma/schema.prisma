@@ -63,7 +63,6 @@ model User {
 model Team {
   id         String      @id @default(cuid())
   name       String      @unique
-  image      String?
   users      User[]
   submission Submission?
 }
@@ -96,7 +95,7 @@ model MediaLink {
 }
 
 model Track {
-  type       TrackType    @id
+  type       TrackType    @id @unique
   submission Submission[]
 }
 
@@ -107,7 +106,7 @@ model FormInfo {
   year             Int
   experience       Experience
   hasTeam          Boolean
-  shouldMatchTeam  Boolean @default(false)
+  shouldMatchTeam  Boolean    @default(false)
   potentialMembers String?
   shirtSize        ShirtSize
 

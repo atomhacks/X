@@ -5,7 +5,7 @@ import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "./prisma";
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, getServerSession } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { Adapter } from "next-auth/adapters";
 import DiscordProvider from "next-auth/providers/discord";
@@ -122,6 +122,14 @@ export const getUser = async (id: string) => {
   return user;
 };
 
+export const getUserFromRequest = async () => {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user) {
+    return null;
+  }
+  return getUser(session.user.id);
+}
+
 export const getSignedUsers = async () => {
   return await prisma.user.findMany({
     where: { NOT: { formInfo: null } },
@@ -144,13 +152,9 @@ export const getAllSubmissions = async () => {
 };
 
 export const getSubmission = async (
-  req: NextRequest | NextApiRequest | GetServerSidePropsContext["req"] | string,
-  id: string,
+  id?: string,
 ) => {
-  const jwt = typeof req == "string" ? req : (await getToken({ req }))?.sub;
-  if (!jwt) {
-    return null;
-  }
+  const user = await getUserFromRequest();
   // extremely common prisma W
   const submission = await prisma.submission.findFirst({
     where: {
@@ -163,7 +167,7 @@ export const getSubmission = async (
           team: {
             users: {
               some: {
-                id: jwt,
+                id: user?.id,
               },
             },
           },
@@ -176,6 +180,7 @@ export const getSubmission = async (
           users: true,
         },
       },
+      media: true,
     },
   });
   if (!submission) {

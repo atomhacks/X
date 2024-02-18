@@ -1,3 +1,6 @@
+# DON'T USE NPM, USE PNPM. RUN `npm i -g pnpm` AND USE PNPM INSTEAD OF NPM. ALL COMMANDS SHOULD BE THE SAME.
+
+
 # Learning from AtomHacks IX
 
 If you're seeing this, I'm assuming it's time for the AtomHacks X website to be created. Before you begin, here are some considerations and solutions that I have noted from the previous AtomHacks.

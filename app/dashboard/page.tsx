@@ -16,6 +16,9 @@ export default async function Dashboard() {
     console.log("yeas");
     redirect("/dashboard/form");
   }
+
+  console.log(session.user)
+  console.log(user);
   return (
     <>
       <div className="mb-8 flex items-center justify-center">

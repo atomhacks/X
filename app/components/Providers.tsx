@@ -9,5 +9,5 @@ type Props = {
 };
 
 export const Providers: React.FC<React.PropsWithChildren<Props>> = ({ children, session }) => {
-  return <SessionProvider session={session}>{children}</SessionProvider>;
+  return <SessionProvider>{children}</SessionProvider>;
 };

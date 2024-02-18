@@ -105,7 +105,7 @@ export default function Gallery() {
         </Transition>
         <div className="p-8 text-white">
           <div className="mb-8 flex items-center justify-center">
-            <span className="font-morro border-b-4 border-green-500 py-6 text-7xl md:text-5xl">GALLERY</span>
+            <span className="font-morro underline decoration-green-500 decoration-4 underline-offset-8 py-6 text-7xl md:text-5xl">GALLERY</span>
           </div>
           <h1 className="mb-3 inline-block border-b-4 border-yellow-500 text-4xl">2022</h1>
           <div className="flex justify-center">

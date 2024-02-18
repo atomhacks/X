@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
-
+import FlyingCars from "../flyingCars"
 import Logo from "./Logo";
 import Link from "next/link";
 
@@ -26,6 +26,7 @@ export default function Hero() {
 
   return (
     <div className="min-h-[80vh]">
+      <FlyingCars />
       <div className="flex flex-col items-center justify-center p-8 pt-0">
         <Logo />
         <h1
