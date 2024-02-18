@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 const requiredFields = ["name", "osis", "experience", "year", "hasTeam", "shirtSize"] as const;
-const fields = [...requiredFields, "hasTeam", "shouldMatchTeam", "teamMembers"] as const;
+const fields = [...requiredFields, "hasTeam", "shouldMatchTeam", "potentialMembers"] as const;
 
 export async function POST(req: Request) {
   if (req.method != "POST") {
