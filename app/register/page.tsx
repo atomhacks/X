@@ -23,7 +23,7 @@ export default function Register() {
     <>
       <NavBar />
       <div className="flex h-[80vh] items-center justify-center border-0">
-        <Card className="bg-ocean-400 rounded-2xl rounded-xl border-none">
+        <Card className="bg-ocean-400 rounded-2xl border-none">
           <CardHeader>
             <CardTitle>Register</CardTitle>
             <CardDescription>
