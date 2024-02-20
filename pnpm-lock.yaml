@@ -11,6 +11,9 @@ dependencies:
   '@aws-sdk/client-ses':
     specifier: ^3.515.0
     version: 3.515.0
+  '@gsap/react':
+    specifier: ^2.1.0
+    version: 2.1.0
   '@headlessui/react':
     specifier: ^1.7.18
     version: 1.7.18(react-dom@18.2.0)(react@18.2.0)
@@ -35,6 +38,9 @@ dependencies:
   framer-motion:
     specifier: ^11.0.5
     version: 11.0.5(react-dom@18.2.0)(react@18.2.0)
+  gsap:
+    specifier: ^3.12.5
+    version: 3.12.5
   hamburger-react:
     specifier: ^2.5.0
     version: 2.5.0(react@18.2.0)
@@ -677,6 +683,13 @@ packages:
   /@fastify/busboy@2.1.0:
     resolution: {integrity: sha512-+KpH+QxZU7O4675t3mnkQKcZZg56u+K/Ct2K+N2AZYNVK8kyeo/bI18tI8aPm3tvNNRyTWfj6s5tnGNlcbQRsA==}
     engines: {node: '>=14'}
+    dev: false
+
+  /@gsap/react@2.1.0:
+    resolution: {integrity: sha512-pwdFXvOM5IsRZXpWTKkQoEjb3/iUjDCU1BCJDlE6pHgVjG+7Ep/7+sszUgqVZ2Jc0mR8gnhtDWyx5cQAT4kwQw==}
+    dependencies:
+      gsap: 3.12.5
+      react: 18.2.0
     dev: false
 
   /@headlessui/react@1.7.18(react-dom@18.2.0)(react@18.2.0):
@@ -2762,6 +2775,10 @@ packages:
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+
+  /gsap@3.12.5:
+    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
+    dev: false
 
   /hamburger-react@2.5.0(react@18.2.0):
     resolution: {integrity: sha512-5GSXe+ucxTPJ0SkhIsPQ/PRDweZPIKya1lfahAuExx31SdheeUA4uOPfQIAirbKona8hvo79VDr5LJQzPXsdpw==}
