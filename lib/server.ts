@@ -1,7 +1,4 @@
-import { Prisma } from "@prisma/client";
-import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
-import { getToken } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import prisma from "./prisma";
 import { NextAuthOptions, getServerSession } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -78,6 +75,7 @@ export const missingFields = () => NextResponse.json({ message: "Bad Request - M
 export const duplicateEntry = () => NextResponse.json({ message: "Conflict" }, { status: 409 });
 export const notFound = () => NextResponse.json({ message: "Not Found" }, { status: 404 });
 
+/*
 type GetUserOverloads = {
   (req: NextRequest | NextApiRequest | GetServerSidePropsContext["req"]): Promise<Prisma.UserGetPayload<{
     include: {
@@ -94,6 +92,7 @@ type GetUserOverloads = {
     };
   }> | null>;
 };
+*/
 
 export const getUser = async (id: string) => {
   const user = await prisma.user.findUnique({
