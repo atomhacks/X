@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
-import FlyingCars from "./FlyingCars"
+//import FlyingCars from "./FlyingCars"
 import Link from "next/link";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
@@ -26,7 +26,7 @@ export default function Hero() {
 
   return (
     <div className="min-h-[80vh]">
-      <FlyingCars />
+      {/*<FlyingCars />*/}
       <div className="flex flex-col items-center justify-center p-8 pt-0">
         <Logo />
         <h1

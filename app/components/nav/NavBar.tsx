@@ -54,12 +54,12 @@ export default function NavBar() {
         {routes.map((route, i) =>
           i <= 0 ? (
             <div key={i} className="mr-auto">
-              <NavButton href={route.href} lineColor={route.color}>
+              <NavButton href={route.href} linecolor={route.color}>
                 {route.title}
               </NavButton>
             </div>
           ) : (
-            <NavButton key={i} href={route.href} lineColor={route.color}>
+            <NavButton key={i} href={route.href} linecolor={route.color}>
               {route.title}
             </NavButton>
           ),

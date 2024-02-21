@@ -24,14 +24,14 @@ export default function NavBarDash() {
   return (
     <div className="sticky top-0 z-50 flex min-w-full items-center justify-end gap-x-4 p-4">
       <SignOutButton />
-      <NavButton href="/" lineColor="hover:decoration-green-400">
+      <NavButton href="/" linecolor="hover:decoration-green-400">
         Back to Home
       </NavButton>
-      <NavButton className="mr-auto" href="/dashboard" lineColor="hover:decoration-green-400">
+      <NavButton className="mr-auto" href="/dashboard" linecolor="hover:decoration-green-400">
         Dashboard
       </NavButton>
       {routes.map((route, index) => (
-        <NavButton key={index} href={route.path} lineColor={route.color}>
+        <NavButton key={index} href={route.path} linecolor={route.color}>
           {route.name}
         </NavButton>
       ))}

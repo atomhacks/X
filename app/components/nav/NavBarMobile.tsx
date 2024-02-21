@@ -18,7 +18,7 @@ export default function NavBarMobile() {
               {routes.map((route, i) => {
                 return (
                   <div key={i} className="mt-4">
-                    <NavButton key={i} href={route.href} lineColor={route.real}>
+                    <NavButton key={i} href={route.href} linecolor={route.real}>
                       {route.title}
                     </NavButton>
                   </div>

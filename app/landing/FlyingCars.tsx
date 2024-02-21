@@ -16,6 +16,8 @@ function WidthSize() {
   useEffect(() => {
     function handleResize() {
       const newWidth = window.innerWidth;
+      // Seems to be a bug here:
+      // ReferenceError: window is not defined
       setWidth((prev) => {
         prevWidthRef.current = prev.width;
         return { width: newWidth };
