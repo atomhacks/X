@@ -7,6 +7,11 @@ import { signIn } from "next-auth/react";
 import SubmitButton from "../components/buttons/SubmitButton";
 
 export default function Register() {
+  const session = await getServerSession(authOptions);
+  if (session.user || getUser(session.user.id)) {
+    redirect("/dashboard");
+  }
+  
   const [email, setEmail] = useState("");
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
