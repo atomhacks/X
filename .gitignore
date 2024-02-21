@@ -40,3 +40,6 @@ next-env.d.ts
 # flake
 flake.lock
 flake.nix
+
+# pnpm
+pnpm-lock.yaml
