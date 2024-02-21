@@ -52,7 +52,7 @@ export default function NavBar() {
     <>
       <div className="sticky top-0 z-50 hidden min-w-full gap-x-4 p-4 lg:flex lg:items-center lg:justify-end">
         {routes.map((route, i) =>
-          i == 0 ? (
+          i <= 0 ? (
             <div key={i} className="mr-auto">
               <NavButton href={route.href} lineColor={route.color}>
                 {route.title}

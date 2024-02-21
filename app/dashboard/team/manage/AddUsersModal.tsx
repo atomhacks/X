@@ -22,11 +22,11 @@ export default function AddUsersModal({ users, closed, disabled, currentLength, 
   const [query, setQuery] = useState("");
 
   const filteredUsers =
-    query === ''
+    query === ""
       ? users
       : users.filter((user) => {
-          return user.name?.toLowerCase().includes(query.toLowerCase())
-        })
+          return user.name?.toLowerCase().includes(query.toLowerCase());
+        });
 
   const setSelectedUsers = (people: any) => {
     if (people.length + currentLength >= 4) {
@@ -87,48 +87,56 @@ export default function AddUsersModal({ users, closed, disabled, currentLength, 
                 <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-white">
                   Add Users
                 </Dialog.Title>
-      <Combobox value={selectedUsers} onChange={setSelectedUsers} multiple>
-      {selectedUsers.length > 0 && (
-        <ul className="flex m-2 gap-2">
-          {selectedUsers.map((id) => (
-            <li className="inline-block bg-ocean-400 text-green-400 max-w-36 p-3 rounded-2xl" key={id}>{users.find(user => user.id == id)!.name}</li>
-          ))}
-        </ul>
-      )}
-        <div className="relative mt-1 mb-4">
-          <Combobox.Input className="relative h-12 w-fit min-w-[25%] cursor-pointer rounded-lg bg-ocean-400 py-2 pl-3 pr-10 text-left text-lg shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
-          displayValue={(id) => query}
-          onChange={(event) => setQuery(event.target.value)}
-          >
-          </Combobox.Input>
-          <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-            <Combobox.Options className="absolute mt-1 max-h-60 w-96 overflow-auto rounded-md bg-ocean-400 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {filteredUsers.map((user) => (
-                <Combobox.Option
-                  key={user.id}
-                  className={({ active }) =>
-                    `relative cursor-default cursor-pointer select-none py-2 pl-10 pr-4 ${
-                      active ? "bg-ocean-200 text-green-500" : "text-neutral-200"
-                    }`
-                  }
-                  value={user.id}
-                >
-                  {({ selected }) => (
-                    <>
-                      <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>{user.name}</span>
-                      {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                          <CheckIcon className="h-5 w-5 text-teal-400" aria-hidden="true" />
-                        </span>
-                      ) : null}
-                    </>
+                <Combobox value={selectedUsers} onChange={setSelectedUsers} multiple>
+                  {selectedUsers.length > 0 && (
+                    <ul className="m-2 flex gap-2">
+                      {selectedUsers.map((id) => (
+                        <li className="inline-block max-w-36 rounded-2xl bg-ocean-400 p-3 text-green-400" key={id}>
+                          {users.find((user) => user.id == id)!.name}
+                        </li>
+                      ))}
+                    </ul>
                   )}
-                </Combobox.Option>
-              ))}
-            </Combobox.Options>
-          </Transition>
-        </div>
-      </Combobox>
+                  <div className="relative mb-4 mt-1">
+                    <Combobox.Input
+                      className="relative h-12 w-fit min-w-[25%] cursor-pointer rounded-lg bg-ocean-400 py-2 pl-3 pr-10 text-left text-lg shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+                      onChange={(event) => setQuery(event.target.value)}
+                    ></Combobox.Input>
+                    <Transition
+                      as={Fragment}
+                      leave="transition ease-in duration-100"
+                      leaveFrom="opacity-100"
+                      leaveTo="opacity-0"
+                    >
+                      <Combobox.Options className="absolute mt-1 max-h-60 w-96 overflow-auto rounded-md bg-ocean-400 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        {filteredUsers.map((user) => (
+                          <Combobox.Option
+                            key={user.id}
+                            className={({ active }) =>
+                              `relative cursor-default cursor-pointer select-none py-2 pl-10 pr-4 ${
+                                active ? "bg-ocean-200 text-green-500" : "text-neutral-200"
+                              }`
+                            }
+                            value={user.id}
+                          >
+                            {({ selected }) => (
+                              <>
+                                <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
+                                  {user.name}
+                                </span>
+                                {selected ? (
+                                  <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <CheckIcon className="h-5 w-5 text-teal-400" aria-hidden="true" />
+                                  </span>
+                                ) : null}
+                              </>
+                            )}
+                          </Combobox.Option>
+                        ))}
+                      </Combobox.Options>
+                    </Transition>
+                  </div>
+                </Combobox>
 
                 <div className="mt-4">
                   <SubmitButton

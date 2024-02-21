@@ -1,5 +1,3 @@
-import { getServerSession } from "next-auth";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 import prisma from "../../../../lib/prisma";
 import { getUserFromRequest } from "../../../../lib/server";

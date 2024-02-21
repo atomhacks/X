@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
-import FlyingCars from "../components/flyingCars"
+import FlyingCars from "./FlyingCars"
 import Link from "next/link";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
