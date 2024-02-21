@@ -9,8 +9,8 @@
     "lint": "next lint",
     "format": "npx prisma format",
     "reset": "npx prisma migrate reset",
-    "db:push": "dotenv -e .env.local -- npx prisma db push",
-    "studio": "dotenv -e .env.local -- npx prisma studio",
+    "db:push": "dotenv -e .env.development -- npx prisma db push",
+    "studio": "dotenv -e .env.development -- npx prisma studio",
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
