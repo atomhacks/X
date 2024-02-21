@@ -5,7 +5,6 @@ import {
   filterBody,
   getUserFromRequest,
   missingFields,
-  redirect,
   wrongMethod,
 } from "@/lib/server";
 import { NextResponse } from 'next/server';
@@ -19,7 +18,7 @@ export async function POST(req: Request) {
 
   const user = await getUserFromRequest();
   if (!user) {
-    return redirect("/api/auth/signin");
+    return NextResponse.redirect(new URL("/api/auth/signin", req.url));
   }
 
   const json = await req.json();
@@ -30,11 +29,11 @@ export async function POST(req: Request) {
   }
 
   if (!user.team || !user.teamId) {
-    return redirect("/dashboard/team/create");
+    return NextResponse.redirect(new URL("/dashboard/team/create", req.url));
   }
 
   if (!user.team.submission) {
-    return redirect("/dashboard/submission/create");
+    return NextResponse.redirect(new URL("/dashboard/submission/create", req.url));
   }
 
   if (body.media) {

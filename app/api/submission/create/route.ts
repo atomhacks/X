@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { duplicateEntry, filterBodyAndValidate, getUserFromRequest, missingFields, redirect, wrongMethod } from "@/lib/server";
+import { duplicateEntry, filterBodyAndValidate, getUserFromRequest, missingFields, wrongMethod } from "@/lib/server";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextResponse } from "next/server";
 
@@ -19,11 +19,11 @@ export async function POST(req: Request) {
 
   const user = await getUserFromRequest();
   if (!user) {
-    return redirect("/api/auth/signin");
+    return NextResponse.redirect(new URL("/api/auth/signin", req.url));
   }
 
   if (!user.teamId) {
-    return redirect("/dashboard/team/create")
+    return NextResponse.redirect(new URL("/dashboard/team/create", req.url));
   }
 
   const { tracks, ...restOfBody } = body;
