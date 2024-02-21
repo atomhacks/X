@@ -33,10 +33,9 @@ export default async function Dashboard() {
         Please use the top bar to create a team and submission.
       </h1>
       <div className="flex flex-col items-center justify-around gap-4">
-        {/* The callback url doesn't work as intended i think*/}
         <OAuthButton
           provider="discord"
-          callbackUrl="https://discord.gg/FJ7caqsYph"
+          callbackUrl="/dashboard"
           className={`flex w-2/5 flex-row items-center rounded-lg border-2 bg-transparent p-4 md:w-4/5 ${!user.accounts.find((account) => account.provider === "discord") ? "border-red-500" : "border-green-500"
             }`}
         >
