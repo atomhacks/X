@@ -8,13 +8,4 @@
   "globals": {
     "JSX": true
   },
-  "rules": {
-    "react/no-unescaped-entities": "off",
-    "no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "^_"
-      }
-    ]
-  }
 }
