@@ -36,7 +36,7 @@ export default function Hero() {
           AtomHacks <span style={{ color: colorString }}>X</span>
         </h1>
         <h2 className="relative bottom-4 text-center">
-          Bronx Science's{" "}
+          Bronx Science&apos;s{" "}
           <span style={{ color: colorString }}>
             10<sup>th</sup>
           </span>{" "}

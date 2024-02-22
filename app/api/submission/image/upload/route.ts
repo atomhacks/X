@@ -11,7 +11,7 @@ export async function POST(request: Request) {
       body,
       request,
       onBeforeGenerateToken: async (
-        _pathname: string,
+        /*_pathname: string, */
         /* clientPayload?: string, */
       ) => {
         const user = await getUserFromRequest();
