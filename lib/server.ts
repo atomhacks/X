@@ -71,7 +71,8 @@ export const authOptions: NextAuthOptions = {
 
 export const wrongMethod = () => NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
 export const unauthorized = () => NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-export const missingFields = () => NextResponse.json({ message: "Bad Request - Missing required fields" }, { status: 400 });
+export const missingFields = () =>
+  NextResponse.json({ message: "Bad Request - Missing required fields" }, { status: 400 });
 export const duplicateEntry = () => NextResponse.json({ message: "Conflict" }, { status: 409 });
 export const notFound = () => NextResponse.json({ message: "Not Found" }, { status: 404 });
 
@@ -114,7 +115,7 @@ export const getUser = async (id: string) => {
       formInfo: true,
     },
   });
-  console.log("hi")
+  console.log("hi");
   if (!user) {
     return null;
   }
@@ -127,7 +128,7 @@ export const getUserFromRequest = async () => {
     return null;
   }
   return getUser(session.user.id);
-}
+};
 
 export const getSignedUsers = cache(async () => {
   return await prisma.user.findMany({
@@ -152,22 +153,35 @@ export const getAllSubmissions = async () => {
 
 export const getSubmission = cache(async (id?: string) => {
   const user = await getUserFromRequest();
+  // wtf https://github.com/prisma/prisma/issues/14976
+  const userId = user?.id ?? "-1";
   console.log(id);
+  console.log(user);
   const submission = await prisma.submission.findFirst({
     where: {
-      id,
-      OR: [
+      AND: [
         {
-          public: true,
+          id: {
+            equals: id,
+          },
         },
         {
-          team: {
-            users: {
-              some: {
-                id: user?.id,
+          OR: [
+            {
+              public: {
+                equals: true,
               },
             },
-          },
+            {
+              team: {
+                users: {
+                  some: {
+                    id: userId,
+                  },
+                },
+              },
+            },
+          ],
         },
       ],
     },
@@ -181,6 +195,7 @@ export const getSubmission = cache(async (id?: string) => {
     },
   });
   if (!submission) {
+    console.log("what the hell");
     return null;
   }
   return submission;

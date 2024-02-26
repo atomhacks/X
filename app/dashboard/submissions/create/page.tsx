@@ -33,13 +33,17 @@ export default async function CreateSubmissionPage() {
   ];
 
   return (
-    <div className="max-w-screen-xl mx-8 flex grow items-center justify-center rounded-lg px-4 py-2">
-      <div className="mr-12 flex basis-1/2 flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold text-center">Create a submission</h1>
-        <h2 className="text-neutral-400 text-center">You can edit these details at anytime before and after publishing your submission.</h2>
-      </div>
-      <div className="mt-2 ml-6 flex basis-1/2 items-start justify-start text-neutral-300">
-        <CreateSubmissionForm tracks={tracks} />
+    <div className="flex items-center justify-center">
+      <div className="max-w-screen mx-8 my-8 flex items-center justify-around">
+        <div className="mr-12 flex basis-1/2 flex-col items-center justify-center">
+          <h1 className="text-center text-4xl font-bold">Create a submission</h1>
+          <h2 className="text-center text-neutral-400">
+            You can edit these details at anytime before and after publishing your submission.
+          </h2>
+        </div>
+        <div className="flex items-start justify-start text-neutral-300">
+          <CreateSubmissionForm tracks={tracks} />
+        </div>
       </div>
     </div>
   );

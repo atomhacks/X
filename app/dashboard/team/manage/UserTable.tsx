@@ -59,7 +59,7 @@ export default function UserTable({ my_user, team, users }: Props) {
         )}
       </>
       <table className="table-fixed rounded-xl">
-        <thead className="bg-ocean-200 text-left">
+        <thead className="bg-ocean-300 text-left">
           <tr>
             <th className="p-4">Name</th>
             <th className="p-4">Email</th>

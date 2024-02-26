@@ -1,11 +1,12 @@
 "use client";
 
 import { Combobox, Transition } from "@headlessui/react";
-import { CheckIcon } from "@heroicons/react/24/outline";
+import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { FormEventHandler, Fragment, useState } from "react";
 import SubmitButton from "../../../components/buttons/SubmitButton";
+import FeedbackBanner from "@/app/components/FeedbackBanner";
 
 type Props = {
   users: User[];
@@ -17,6 +18,7 @@ export default function CreateTeamForm({ users }: Props) {
   const [selectedUsers, _setSelectedUsers] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [query, setQuery] = useState("");
+  const [error, setError] = useState(false);
 
   const filteredUsers =
     query === ""
@@ -37,6 +39,7 @@ export default function CreateTeamForm({ users }: Props) {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setError(false);
     setSubmitting(true);
     if (!isValid()) {
       return;
@@ -57,11 +60,17 @@ export default function CreateTeamForm({ users }: Props) {
     if (res.status == 201) {
       router.push("/dashboard?complete");
       router.refresh();
+    } else {
+      setError(true);
+      setSubmitting(false);
     }
   };
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit}>
+      {error && (
+        <FeedbackBanner bgColor="bg-rose-900" icon={<XMarkIcon />}/>
+      )}
       <label className="text-xl" htmlFor="name">
         Team Name
       </label>

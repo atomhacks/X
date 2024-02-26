@@ -23,11 +23,11 @@ export default async function SubmissionPage({ params }: { params: { id: string 
 
   return (
     <>
-      <div className="flex items-center justify-center bg-ocean-200">
+      <div className="flex items-center justify-center bg-ocean-100">
         <PhotoCarousel media={media} />
       </div>
       <div className="mx-auto max-w-screen-md">
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <h1 className="my-4 text-6xl font-bold text-cyan-300">{submission.name}</h1>
           {isMine && <EditMenu />}
         </div>

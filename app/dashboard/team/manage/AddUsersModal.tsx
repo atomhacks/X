@@ -1,6 +1,7 @@
 "use client";
 
 import { Combobox, Dialog, Transition } from "@headlessui/react";
+import { Float } from '@headlessui-float/react'
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
@@ -33,6 +34,7 @@ export default function AddUsersModal({ users, closed, disabled, currentLength, 
       return;
     }
     _setSelectedUsers(people);
+    setQuery("");
   };
 
   const onAdd = async () => {
@@ -85,8 +87,11 @@ export default function AddUsersModal({ users, closed, disabled, currentLength, 
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-ocean-200 p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-white">
-                  Add Users
+                  Add User (start typing)
                 </Dialog.Title>
+                <Dialog.Description as="h4" className="text-base text-neutral-400">
+                  Teams may have a maximum of 4 members. If you cannot select a user, it is most likely because you are at the limit for members.
+                </Dialog.Description>
                 <Combobox value={selectedUsers} onChange={setSelectedUsers} multiple>
                   {selectedUsers.length > 0 && (
                     <ul className="m-2 flex gap-2">
@@ -97,18 +102,16 @@ export default function AddUsersModal({ users, closed, disabled, currentLength, 
                       ))}
                     </ul>
                   )}
-                  <div className="relative mb-4 mt-1">
+                  <Float portal
+                  as="div"
+                  className="relative my-4"
+                  floatingAs={Fragment}
+                  >
                     <Combobox.Input
                       className="relative h-12 w-fit min-w-[25%] cursor-pointer rounded-lg bg-ocean-400 py-2 pl-3 pr-10 text-left text-lg shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
                       onChange={(event) => setQuery(event.target.value)}
                     ></Combobox.Input>
-                    <Transition
-                      as={Fragment}
-                      leave="transition ease-in duration-100"
-                      leaveFrom="opacity-100"
-                      leaveTo="opacity-0"
-                    >
-                      <Combobox.Options className="absolute mt-1 max-h-60 w-96 overflow-auto rounded-md bg-ocean-400 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                      <Combobox.Options className="mt-1 max-h-60 w-96 overflow-auto rounded-md bg-ocean-400 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                         {filteredUsers.map((user) => (
                           <Combobox.Option
                             key={user.id}
@@ -134,8 +137,7 @@ export default function AddUsersModal({ users, closed, disabled, currentLength, 
                           </Combobox.Option>
                         ))}
                       </Combobox.Options>
-                    </Transition>
-                  </div>
+                  </Float>
                 </Combobox>
 
                 <div className="mt-4">

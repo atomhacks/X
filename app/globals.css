@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-rgb: 35, 37, 39;
+    --background-rgb: 14, 24, 30;
 
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;

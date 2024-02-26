@@ -5,6 +5,8 @@ import { Switch } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/navigation";
 import SubmitButton from "../../../components/buttons/SubmitButton";
+import FeedbackBanner from "@/app/components/FeedbackBanner";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 type Props = {
   tracks: {
@@ -21,6 +23,7 @@ export default function CreateSubmissionForm({ tracks }: Props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
   const router = useRouter();
 
   const isValid = () => name != "" && description != "" && selectedTracks.length != 0;
@@ -29,6 +32,7 @@ export default function CreateSubmissionForm({ tracks }: Props) {
     e.preventDefault();
     if (!isValid()) return;
     setSubmitting(true);
+    setError(false);
 
     const body = JSON.stringify({
       name,
@@ -48,11 +52,17 @@ export default function CreateSubmissionForm({ tracks }: Props) {
       router.refresh();
       router.push(`/dashboard/submissions/${json.id}`);
       router.refresh();
+    } else {
+      setError(true);
+      setSubmitting(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      {error && (
+        <FeedbackBanner bgColor="bg-rose-900" icon={<XMarkIcon />}/>
+      )}
       <label className="block text-base text-neutral-400" htmlFor="title">
         Title *
       </label>

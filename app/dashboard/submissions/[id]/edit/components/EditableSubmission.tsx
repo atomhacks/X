@@ -1,12 +1,14 @@
 "use client";
 
-import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline";
+import { ArrowLongLeftIcon, ArrowLongRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
+import { ChangeEventHandler, FormEventHandler, useEffect, useRef, useState } from "react";
 import SubmitButton from "../../../../../components/buttons/SubmitButton";
 import { upload } from "@vercel/blob/client";
+import { Switch } from "@headlessui/react";
+import FeedbackBanner from "@/app/components/FeedbackBanner";
 
 export const revalidate = 0;
 
@@ -18,7 +20,7 @@ type Props = {
           users: true;
         };
       };
-      media: true,
+      media: true;
     };
   }>;
 };
@@ -35,6 +37,10 @@ export default function EditableSubmission({ submission }: Props) {
   const [selectedIcon, setSelectedIcon] = useState<string>(submission.icon);
   const [newImages, setNewImages] = useState<File[]>([]);
   const [selectedImages, setSelectedImages] = useState<string[]>(submission.media.map((sub) => sub.url));
+  // public is reserved keyword
+  const [published, setPublished] = useState(submission.public);
+  const [submitted, setSubmitted] = useState(submission.submitted);
+  const [error, setError] = useState(false);
   const inputFileElement = useRef<null | HTMLInputElement>(null);
 
   const isValid = () => name != "" && description != "";
@@ -67,44 +73,55 @@ export default function EditableSubmission({ submission }: Props) {
     e.preventDefault();
     if (!isValid()) return;
     setSubmitting(true);
+    setError(false);
     console.log(selectedImages);
     console.log(selectedIcon);
+    console.log(published);
+    console.log(submitted);
 
     let body: any = {
       name,
       description,
       srcLink,
       videoLink,
+      submitted,
+      public: published,
     };
 
     try {
       if (newImages.length > 0) {
-        const blobs = await Promise.all(newImages.map(async (file) => (await upload(`Submissions/${submission.id}/${file.name}`, file, {
-          access: "public",
-          handleUploadUrl: "/api/submission/image/upload"
-        })).url));
+        const blobs = await Promise.all(
+          newImages.map(
+            async (file) =>
+              (
+                await upload(`Submissions/${submission.id}/${file.name}`, file, {
+                  access: "public",
+                  handleUploadUrl: "/api/submission/image/upload",
+                })
+              ).url,
+          ),
+        );
         console.log(blobs);
         body = {
           ...body,
           media: blobs,
-        }
+        };
       }
 
       if (newIcon) {
         const blob = await upload(`Submissions/${submission.id}/${newIcon.name}`, newIcon, {
           access: "public",
-          handleUploadUrl: "/api/submission/image/upload"
-        })
+          handleUploadUrl: "/api/submission/image/upload",
+        });
         console.log(blob.url);
         body = {
           ...body,
           icon: blob.url,
-        }
+        };
       }
     } catch (e) {
       console.log("error when uploading images,", e);
     }
-
 
     console.log(body);
 
@@ -122,12 +139,15 @@ export default function EditableSubmission({ submission }: Props) {
       setNewIcon(undefined);
       router.push(`/dashboard/submissions/${submission.id}`);
       return router.refresh();
+    } else {
+      setSubmitting(false);
+      setError(true);
     }
   };
 
   return (
     <>
-      <div className="flex h-96 w-full items-center justify-center bg-ocean-200 py-8 sm:h-80">
+      <div className="flex h-96 w-full items-center justify-center bg-ocean-100 py-8 sm:h-80">
         <button>
           <ArrowLongLeftIcon className="mr-8 h-8 w-8 text-white" onClick={() => setCurrentImage(currentImage - 1)} />
         </button>
@@ -157,7 +177,7 @@ export default function EditableSubmission({ submission }: Props) {
           <ArrowLongRightIcon className="ml-8 h-8 w-8 text-white" onClick={() => setCurrentImage(currentImage + 1)} />
         </button>
       </div>
-      <div className="max-w-screen-md mx-auto p-4">
+      <div className="mx-auto max-w-screen-md p-4">
         <form onSubmit={handleSubmit}>
           <input
             type="file"
@@ -171,10 +191,10 @@ export default function EditableSubmission({ submission }: Props) {
             onChange={onSelectImages}
           ></input>
           <label className="block text-base text-neutral-400" htmlFor="name">
-            Name *
+            Name * (Required)
           </label>
           <input
-            className="mb-4 block w-full rounded-md bg-ocean-500 p-2 text-5xl font-bold shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-teal-500"
+            className="mb-4 block w-full rounded-md bg-ocean-500 p-2 text-5xl font-bold shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-green-500"
             type="text"
             id="name"
             name="name"
@@ -183,10 +203,10 @@ export default function EditableSubmission({ submission }: Props) {
             onInput={(e) => setName((e.target as HTMLInputElement).value)}
           />
           <label className="block text-base text-neutral-400" htmlFor="description">
-            Description *
+            Description * (Required)
           </label>
           <textarea
-            className="text-m mt-1 mb-4 block w-full rounded-lg bg-ocean-500 p-2 shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-teal-500"
+            className="text-m mb-4 mt-1 block w-full rounded-lg bg-ocean-500 p-2 shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-green-500"
             id="description"
             name="description"
             rows={10}
@@ -195,7 +215,9 @@ export default function EditableSubmission({ submission }: Props) {
             autoComplete="off"
             onInput={(e) => setDescription((e.target as HTMLInputElement).value)}
           />
-          <label htmlFor="image">Icon (For best results, image should be a square)</label>
+          <label className="block text-base text-neutral-400" htmlFor="image">
+            Icon (Optional, the preview image shown in Submission Gallery. For best results, image should be a square)
+          </label>
           <input
             type="file"
             id="image"
@@ -203,11 +225,11 @@ export default function EditableSubmission({ submission }: Props) {
             accept="image/png, image/jpeg, image/webp"
             onChange={onSelectIcon}
           ></input>
-          <label className="block text-base text-neutral-400" htmlFor="name">
+          <label className="mt-4 block text-base text-neutral-400" htmlFor="name">
             Source Code (Google Drive Link, GitHub repository, etc)
           </label>
           <input
-            className="mb-4 block w-full rounded-md bg-ocean-500 p-2 text-lg shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-teal-500"
+            className="mb-4 block w-full rounded-md bg-ocean-500 p-2 text-lg shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-green-500"
             type="text"
             id="src"
             name="src"
@@ -215,11 +237,11 @@ export default function EditableSubmission({ submission }: Props) {
             value={srcLink}
             onInput={(e) => setSrcLink((e.target as HTMLInputElement).value)}
           />
-          <label className="bl ock text-base text-neutral-400" htmlFor="name">
+          <label className="block text-base text-neutral-400" htmlFor="name">
             Video Link (YouTube)
           </label>
           <input
-            className="mb-6 block w-full rounded-md bg-ocean-500 p-2 text-lg shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-teal-500"
+            className="mb-6 block w-full rounded-md bg-ocean-500 p-2 text-lg shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-green-500"
             type="text"
             id="vid"
             name="vid"
@@ -227,9 +249,53 @@ export default function EditableSubmission({ submission }: Props) {
             value={videoLink}
             onInput={(e) => setVideoLink((e.target as HTMLInputElement).value)}
           />
-          {videoLink !== null ? (
+          {videoLink != "" && videoLink != null ? (
             <iframe className="rounded-3xl" src={videoLink.replace("watch?v=", "embed/")} width={1000} height={500} />
           ) : null}
+          <Switch.Group>
+            <Switch.Label className="mb-1 block text-base text-neutral-400">Make Public</Switch.Label>
+            <Switch.Description className="mb-2 block text-base text-neutral-400">
+              This will make your project viewable in the submission gallery, but it is not required for your project to
+              be judged and receive a prize.
+            </Switch.Description>
+            <Switch
+              checked={published}
+              onChange={setPublished}
+              className={`${published ? "bg-green-500" : "bg-ocean-500"}
+          relative inline-flex h-[28.5px] w-[55.5px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75`}
+            >
+              <span className="sr-only">Use setting</span>
+              <span
+                aria-hidden="true"
+                className={`${published ? "translate-x-7" : "translate-x-0"}
+            pointer-events-none inline-block h-[26px] w-[26px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+              />
+            </Switch>
+          </Switch.Group>
+          <Switch.Group>
+            <Switch.Label className="mb-1 mt-8 block text-base text-cyan-500">Ready for Submission </Switch.Label>
+            <Switch.Description className="mb-2 mt-2 text-base text-neutral-400">
+              <span className="mb-2 text-base text-neutral-300 underline decoration-cyan-600 decoration-2 underline-offset-2">
+                (THIS OPTION MUST BE CHECKED IN ORDER FOR YOUR PROJECT TO BE JUDGED AND QUALIFY FOR A PRIZE)
+              </span>{" "}
+              By checking this, you understand that you will showcase your project with a live demo in order to qualify
+              for a prize.
+            </Switch.Description>
+            <Switch
+              checked={submitted}
+              onChange={setSubmitted}
+              className={`${submitted ? "bg-green-500" : "bg-ocean-500"}
+          relative inline-flex h-[28.5px] w-[55.5px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75`}
+            >
+              <span className="sr-only">Use setting</span>
+              <span
+                aria-hidden="true"
+                className={`${submitted ? "translate-x-7" : "translate-x-0"}
+            pointer-events-none inline-block h-[26px] w-[26px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+              />
+            </Switch>
+          </Switch.Group>
+          <div className="block">{error && <FeedbackBanner bgColor="bg-rose-900" icon={<XMarkIcon />} />}</div>
           <div className="mt-4 py-2">
             <SubmitButton loading={submitting} disabled={submitting || (isValid() ? false : true)}>
               Update
