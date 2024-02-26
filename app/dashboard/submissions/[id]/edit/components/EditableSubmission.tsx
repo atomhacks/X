@@ -4,7 +4,7 @@ import { ArrowLongLeftIcon, ArrowLongRightIcon, XMarkIcon } from "@heroicons/rea
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ChangeEventHandler, FormEventHandler, useEffect, useRef, useState } from "react";
+import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
 import SubmitButton from "../../../../../components/buttons/SubmitButton";
 import { upload } from "@vercel/blob/client";
 import { Switch } from "@headlessui/react";
