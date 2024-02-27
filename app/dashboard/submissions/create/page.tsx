@@ -18,16 +18,15 @@ export default async function CreateSubmissionPage() {
 
   const tracks = [
     {
-      name: "GENERAL",
-      description:
-        "Everyone is automatically registered for the regular track. Do your best to stick to the theme of CENSORED.",
-      prizes: ["Sample prize 1", "sample prize 2", "sample prize 3"],
+      name: "Regular",
+      description: "Everyone is automatically registered for the regular track. Do your best to stick to the theme.",
+      prizes: ["Meta Quest 2", "Polaroid Instant Camera", "Anker Power Bank"],
       value: "GENERAL",
     },
     {
       name: "Beginner",
-      description: "Your project will be up against other beginners. All groupmates must be beginners.",
-      prizes: ["Sample prize"],
+      description: "Your project will be up against other beginners. All members must be beginners to qualify.",
+      prizes: ["Lava Lamp"],
       value: "BEGINNER",
     },
   ];
