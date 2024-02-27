@@ -2,7 +2,9 @@ import NavButton from "@/app/components/nav/NavButton";
 import SignOutButton from "../buttons/SignOutButton";
 
 export default function NavBarDash() {
-  const routes = [
+  const is_it_hackathon_time = process.env.HACKATHON_TIME === "true";
+
+  const routes = !is_it_hackathon_time ? [] : [
     {
       name: "Team",
       path: "/dashboard/team/manage",

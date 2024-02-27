@@ -44,6 +44,11 @@ const qas = [
     answer:
       "Yes, you will be able to utilize these technologies so long as the logic/code that you implement is your own.",
   },
+  {
+    question: "What do I win?",
+    answer:
+      "Our top prize is an Oculus Quest! We have several other prizes available for second place and third place, as well as a prize for the best beginner group. However, there will be several freebies throughout the event, including a free T-Shirt and stickers! Check the email that was sent to all Bronx Science students for more details",
+  },
 ];
 
 export default function FAQ() {
