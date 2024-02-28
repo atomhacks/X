@@ -22,7 +22,6 @@ const photos_2022 = [
   "DSC_8571.JPG",
   "DSC_8915.JPG",
   "DSC_9020.JPG",
-  "DSC_9025.JPG",
   "DSC_9041.JPG",
   "DSC_9073.JPG",
   "IMG_8720.JPG",
