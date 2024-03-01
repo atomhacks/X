@@ -11,7 +11,8 @@ export default async function SubmissionPage({ params }: { params: { id: string 
     notFound();
   }
 
-  const isMine = submission.team.users.map((user) => user.id).some((id) => id == user?.id) ?? false;
+  const isMine =
+    (submission.team.users.map((user) => user.id).some((id) => id == user?.id) ?? false) || user?.role === "ADMIN";
 
   const media: Array<{ src: string; type: string }> = [];
 

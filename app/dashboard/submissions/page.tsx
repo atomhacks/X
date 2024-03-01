@@ -1,17 +1,22 @@
-import { getAllSubmissions } from "../../../lib/server";
+import { getAllSubmissions, getAllSubmissionsPublic, getUserFromRequest } from "../../../lib/server";
 import Image from "next/image";
 import Link from "next/link";
 
 import { HandThumbUpIcon, EyeIcon } from "@heroicons/react/24/solid";
 
 export default async function Submissions() {
-  const fetchedSubmissions = await getAllSubmissions();
+  let fetchedSubmissions = await getAllSubmissionsPublic();
+  const user = await getUserFromRequest();
+  if (user?.role === "ADMIN") {
+    fetchedSubmissions = await getAllSubmissions();
+  }
+
   console.log(fetchedSubmissions);
   return (
     <div className="font-montserrat text-white">
-      <h1 className="mx-3 mt-6 mb-4 text-4xl font-bold">Submissions</h1>
+      <h1 className="mx-3 mb-4 mt-6 text-4xl font-bold">Submissions</h1>
       <div className="mx-3">
-        <div className="flex flex-wrap flex-row gap-1.5">
+        <div className="flex flex-row flex-wrap gap-1.5">
           {fetchedSubmissions.map((submission, i) => (
             <Link
               key={i}
@@ -23,7 +28,7 @@ export default async function Submissions() {
                   <Image className="object-fill" alt="" fill src={submission.icon}></Image>
                 </span>
               </div>
-              <div className="relative mt-1.5 mb-1 max-h-11 w-full overflow-hidden text-ellipsis text-start">
+              <div className="relative mb-1 mt-1.5 max-h-11 w-full overflow-hidden text-ellipsis text-start">
                 <h1 className="text-base font-medium">{submission.name}</h1>
               </div>
               <div className="relative text-start text-base font-normal">
