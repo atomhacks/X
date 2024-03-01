@@ -2,8 +2,20 @@ import { notFound } from "next/navigation";
 import { getSubmission, getUserFromRequest } from "../../../../lib/server";
 import EditMenu from "./components/EditMenu";
 import PhotoCarousel from "./components/MediaCarousel";
+import { StaticImageData } from "next/image";
+import { PlayCircleIcon } from "@heroicons/react/24/solid";
+import VercelAd from "../../../../public/ads/vercel.png";
+import Image from "next/image";
 
 export default async function SubmissionPage({ params }: { params: { id: string } }) {
+  const ads: Array<{ src: StaticImageData; link: string }> = [
+    {
+      src: VercelAd,
+      link: "https://vercel.com",
+    },
+  ];
+
+  const randomAd = ads[Math.floor(Math.random() * ads.length)];
   const user = await getUserFromRequest();
 
   const submission = await getSubmission(params.id);
@@ -23,17 +35,42 @@ export default async function SubmissionPage({ params }: { params: { id: string 
   });
 
   return (
-    <>
-      <div className="flex items-center justify-center bg-ocean-100">
-        <PhotoCarousel media={media} />
-      </div>
-      <div className="mx-auto max-w-screen-md">
-        <div className="flex items-center justify-between">
-          <h1 className="my-4 text-6xl font-bold text-cyan-300">{submission.name}</h1>
-          {isMine && <EditMenu />}
+    <div className="flex h-full flex-col overflow-auto">
+      <div className="my-4 h-[90px] w-full items-center justify-center">
+        <div className="relative m-auto h-[90px] w-[728px] items-center justify-center">
+          <a href={randomAd.link}>
+            {" "}
+            <Image className="" src={randomAd.src} alt="test object-contain" fill />
+          </a>
         </div>
-        <p className="my-4 whitespace-pre-line text-xl">{submission.description}</p>
       </div>
-    </>
+      <div className="mx-auto flex flex-col justify-center">
+        <div className="flex flex-row justify-center">
+          <PhotoCarousel media={media} />
+          <div className="flex justify-center">
+            <div className="ml-4 mr-3 flex w-80 max-w-screen-md flex-col px-6 py-4">
+              <div className="mb-auto">
+                <h1 className="my-2 text-5xl font-extrabold text-white">{submission.name}</h1>
+                <h1 className="text-base">By {submission.team.name}</h1>
+              </div>
+              <div className="mt-auto">
+                <div
+                  className={`flex h-16 w-full items-center justify-center rounded-lg align-bottom ${submission.srcLink ? `bg-green-600` : `bg-red-500`}`}
+                >
+                  <a href={submission.srcLink}>
+                    <PlayCircleIcon className="m-auto h-9 w-9" />
+                  </a>
+                </div>
+              </div>
+            </div>
+            {isMine && <EditMenu />}
+          </div>
+        </div>
+        <div className="my-4 max-w-[1052px] flex-col overflow-auto">
+          <h1 className="my-2 text-xl font-bold">Description</h1>
+          <p className="whitespace-pre-line text-base font-normal">{submission.description}</p>
+        </div>
+      </div>
+    </div>
   );
 }
