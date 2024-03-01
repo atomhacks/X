@@ -23,6 +23,12 @@ export default async function SubmissionPage({ params }: { params: { id: string 
     notFound();
   }
 
+  let url = submission.srcLink;
+
+  if (!(submission.srcLink.startsWith("https") && submission.srcLink.startsWith("http"))) {
+    url = "https://" + url;
+  }
+
   const isMine =
     (submission.team.users.map((user) => user.id).some((id) => id == user?.id) ?? false) || user?.role === "ADMIN";
 
@@ -57,7 +63,7 @@ export default async function SubmissionPage({ params }: { params: { id: string 
                 <div
                   className={`flex h-16 w-full items-center justify-center rounded-lg align-bottom ${submission.srcLink ? `bg-green-600` : `bg-red-500`}`}
                 >
-                  <a href={submission.srcLink}>
+                  <a href={url}>
                     <PlayCircleIcon className="m-auto h-9 w-9" />
                   </a>
                 </div>
