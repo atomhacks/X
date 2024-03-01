@@ -25,6 +25,17 @@ type Props = {
   }>;
 };
 
+function getYouTubeId(url: string) {
+  var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  var match = url.match(regExp);
+
+  if (match && match[2].length == 11) {
+    return match[2];
+  } else {
+    return "error";
+  }
+}
+
 export default function EditableSubmission({ submission }: Props) {
   const router = useRouter();
   const [name, setName] = useState(submission.name);
@@ -250,7 +261,11 @@ export default function EditableSubmission({ submission }: Props) {
             onInput={(e) => setVideoLink((e.target as HTMLInputElement).value)}
           />
           {videoLink != "" && videoLink != null ? (
-            <iframe className="rounded-3xl" src={videoLink.replace("watch?v=", "embed/")} width={1000} height={500} />
+            <iframe
+              className="aspect-video w-full rounded-md"
+              src={"https://www.youtube.com/embed/" + getYouTubeId(videoLink)}
+              width="100%"
+            />
           ) : null}
           <Switch.Group>
             <Switch.Label className="mb-1 block text-base text-neutral-400">Make Public</Switch.Label>
