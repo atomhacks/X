@@ -158,11 +158,11 @@ export default function EditableSubmission({ submission }: Props) {
 
   return (
     <>
-      <div className="flex h-96 w-full items-center justify-center bg-ocean-100 py-8 sm:h-80">
+      <div className="flex w-full items-center justify-center bg-ocean-100 p-8">
         <button>
           <ArrowLongLeftIcon className="mr-8 h-8 w-8 text-white" onClick={() => setCurrentImage(currentImage - 1)} />
         </button>
-        <div className="relative flex h-full w-2/6 min-w-[600px] flex-col items-center justify-center rounded-xl bg-neutral-900">
+        <div className="relative flex aspect-video w-2/6 items-center justify-center rounded-xl bg-neutral-900">
           <>
             <div className="absolute z-10 flex flex-col items-center justify-center space-y-2">
               <button
@@ -174,12 +174,7 @@ export default function EditableSubmission({ submission }: Props) {
             </div>
             <>
               {selectedImages && selectedImages[currentImage] && (
-                <Image
-                  className="absolute rounded-xl object-cover"
-                  src={selectedImages[currentImage]}
-                  fill
-                  alt="image"
-                ></Image>
+                <Image className="rounded-xl object-cover" src={selectedImages[currentImage]} fill alt="image"></Image>
               )}
             </>
           </>
