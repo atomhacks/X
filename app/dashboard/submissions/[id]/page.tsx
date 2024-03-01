@@ -7,6 +7,17 @@ import { PlayCircleIcon } from "@heroicons/react/24/solid";
 import VercelAd from "../../../../public/ads/vercel.png";
 import Image from "next/image";
 
+function getYouTubeId(url: string) {
+  var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  var match = url.match(regExp);
+
+  if (match && match[2].length == 11) {
+    return match[2];
+  } else {
+    return "error";
+  }
+}
+
 export default async function SubmissionPage({ params }: { params: { id: string } }) {
   const ads: Array<{ src: StaticImageData; link: string }> = [
     {
@@ -34,7 +45,7 @@ export default async function SubmissionPage({ params }: { params: { id: string 
 
   const media: Array<{ src: string; type: string }> = [];
 
-  media.push({ src: submission.videoLink as string, type: "video" });
+  media.push({ src: ("https://www.youtube.com/embed/" + getYouTubeId(submission.videoLink)) as string, type: "video" });
 
   submission.media.forEach((image) => {
     media.push({ src: image.url, type: "image" });
