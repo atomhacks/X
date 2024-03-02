@@ -2,10 +2,6 @@ import { notFound } from "next/navigation";
 import { getSubmission, getUserFromRequest } from "../../../../lib/server";
 import EditMenu from "./components/EditMenu";
 import PhotoCarousel from "./components/MediaCarousel";
-import { StaticImageData } from "next/image";
-import { PlayCircleIcon } from "@heroicons/react/24/solid";
-import VercelAd from "../../../../public/ads/vercel.png";
-import Image from "next/image";
 
 function getYouTubeId(url: string) {
   var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -38,7 +34,10 @@ export default async function SubmissionPage({ params }: { params: { id: string 
   const media: Array<{ src: string; type: string }> = [];
 
   if (submission.srcLink !== "") {
-    media.push({ src: ("https://www.youtube.com/embed/" + getYouTubeId(submission.videoLink)) as string, type: "video" });
+    media.push({
+      src: ("https://www.youtube.com/embed/" + getYouTubeId(submission.videoLink)) as string,
+      type: "video",
+    });
   }
 
   submission.media.forEach((image) => {
