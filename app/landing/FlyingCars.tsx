@@ -2,15 +2,17 @@
 "use client";
 
 import { useEffect, useState, useRef, PropsWithChildren } from "react";
-import flyingCarOne from "@/public/cars/flyingCar.svg";
-import flyingCarTwo from "@/public/cars/flyingCar-1.svg";
-import flyingCarThree from "@/public/cars/flyingCar-2.svg";
+import flyingCarOne from "@/public/cars/flyingCar1.svg";
+import flyingCarTwo from "@/public/cars/flyingCar2.svg";
+import flyingCarThree from "@/public/cars/flyingCar3.svg";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 
 function WidthSize() {
-  const [currentWidth, setWidth] = useState({ width: window.innerWidth });
+  const hasWindow = typeof window !== 'undefined';
+  const windowWidth = hasWindow ? window.innerWidth : 0;
+  const [currentWidth, setWidth] = useState({ width: windowWidth });
   const prevWidthRef = useRef(currentWidth.width);
 
   useEffect(() => {
@@ -32,13 +34,13 @@ function WidthSize() {
 }
 
 type Props = {
-  speed: number;
   src: string;
+  speed: number;
+  opposite?: boolean;
   hover: number[][];
-  scaleX?: number;
-  endpoint?: number;
   left?: number;
   right?: number;
+
 };
 
 function FlyCar(props: PropsWithChildren<Props>) {
@@ -46,12 +48,23 @@ function FlyCar(props: PropsWithChildren<Props>) {
   const container = useRef(null);
   const carRef = useRef(null);
   const hoverRef = useRef(null);
+  let margin = "0";
+  let scaleX = 1;
+  let endpoint = width + 210;
+
+  if (props.opposite) {
+    margin = `75px -210px`;
+  } else {
+    margin = `75px ${width}px`;
+    scaleX = -1;
+    endpoint = -(width + 210);
+  }
 
   useGSAP(
     () => {
       if (carRef.current) {
         gsap.to(carRef.current, {
-          x: props.endpoint || width + 210,
+          x: endpoint,
           duration: props.speed,
           ease: "none",
           repeat: -1,
@@ -64,7 +77,7 @@ function FlyCar(props: PropsWithChildren<Props>) {
         })
 
         if (width !== oldWidth) {
-          gsap.set(carRef.current, { x: props.endpoint || width + 210 });
+          gsap.set(carRef.current, { x: endpoint });
         }
       }
 
@@ -86,23 +99,22 @@ function FlyCar(props: PropsWithChildren<Props>) {
     <div ref={container}>
       <div
         ref={carRef}
-        className="relative mt-[3.5rem] h-[auto] w-[13rem] md:mt-[5rem]"
         style={{
-          transform: `scaleX(${props.scaleX || 1})`,
-          right: props.right,
-          left: props.left,
+          transform: `scaleX(${scaleX})`,
+          margin: margin
         }}
+        className="relative h-[auto] w-[13rem]"
       >
         <Image src={props.src} alt="" className="h-[auto] w-[13rem]" />
         <div className="flex flex-row opacity-0" ref={hoverRef}>
-          {props.hover.map((margin: number[], index) => (
+          {props.hover.map((hoverMargin: number[], index) => (
             <svg
             key={index}
             className="mt-1 h-[auto] w-[2rem] fill-[#5ccbe5]"
             viewBox="0 0 40 12"
             style={{
-              marginLeft: margin[0],
-              transform: `rotate(${margin[1]}deg)`,
+              marginLeft: hoverMargin[0],
+              transform: `rotate(${hoverMargin[1]}deg)`,
             }}
             >
               <rect y="0" width="40" height="4" rx="1.98" ry="1.98" />
@@ -116,27 +128,22 @@ function FlyCar(props: PropsWithChildren<Props>) {
 }
 
 export default function flyingCars() {
-  const { width } = WidthSize();
-
   return (
     <div className="absolute h-[32rem] viewport-width overflow-hidden">
       <FlyCar src={flyingCarOne}
         speed={16}
-        right={210}
+        opposite={true}
         hover={[[50], [50]]}
       />
       <FlyCar
         src={flyingCarTwo}
         speed={18}
-        left={width}
         hover={[[25, 5], [100]]}
-        scaleX={-1}
-        endpoint={-(width + 210)}
       />
       <FlyCar
         src={flyingCarThree}
         speed={14}
-        right={210}
+        opposite={true}
         hover={[
           [9, 3],
           [45, 3],
