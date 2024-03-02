@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import empowerImg from "@/public/gallery/2023/DSC_1144.jpg";
-import dreamImg from "@/public/gallery/2023/DSC_1129.jpg";
+import dreamImg from "@/public/gallery/2023/DSC_1128.jpg";
 import demoImg from "@/public/gallery/2023/DSC_1061.jpg";
 import foodImg from "@/public/gallery/2023/DSC_1031.jpg";
 import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
