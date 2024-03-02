@@ -2,7 +2,7 @@ import "server-only";
 import { getServerSession } from "next-auth";
 import { authOptions, getUser } from "@/lib/server";
 import { CheckCircleIcon, ExclamationCircleIcon, LinkIcon } from "@heroicons/react/24/outline";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -17,8 +17,8 @@ export default async function Dashboard() {
   }
 
   if (!user.formInfo) {
-    console.log("User has not completed form, redirecting.");
-    redirect("/dashboard/form");
+    console.log("No more new sign-ups");
+    notFound();
   }
 
   console.log(session.user);
