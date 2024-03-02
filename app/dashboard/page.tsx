@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { authOptions, getUser } from "@/lib/server";
 import { CheckCircleIcon, ExclamationCircleIcon, LinkIcon } from "@heroicons/react/24/outline";
 import { redirect } from "next/navigation";
-import OAuthButton from "../components/buttons/OAuthButton";
 
 export const dynamic = "force-dynamic";
 

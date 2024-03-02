@@ -39,9 +39,9 @@ function getYouTubeId(url: string) {
 export default function EditableSubmission({ submission }: Props) {
   const router = useRouter();
   const [name, setName] = useState(submission.name);
-  const [description, setDescription] = useState(submission.description);
+  const [description, setDescription] = useState(submission.description as string);
   const [srcLink, setSrcLink] = useState<string>(submission.srcLink as string);
-  const [librariesUsed, setLibrariesUsed] = useState<string>(submission.librariesUsed);
+  const [librariesUsed, setLibrariesUsed] = useState<string>(submission.librariesUsed as string);
   const [videoLink, setVideoLink] = useState<string>(submission.videoLink as string);
   const [submitting, setSubmitting] = useState(false);
   const [currentImage, _setCurrentImage] = useState(0);
