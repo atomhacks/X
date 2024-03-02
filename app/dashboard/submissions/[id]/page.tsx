@@ -3,7 +3,6 @@ import { getSubmission, getUserFromRequest } from "../../../../lib/server";
 import EditMenu from "./components/EditMenu";
 import PhotoCarousel from "./components/MediaCarousel";
 import { PlayCircleIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
 
 function getYouTubeId(url: string) {
   var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
