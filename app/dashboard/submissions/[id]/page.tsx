@@ -34,7 +34,9 @@ export default async function SubmissionPage({ params }: { params: { id: string 
 
   const media: Array<{ src: string; type: string }> = [];
 
-  media.push({ src: ("https://www.youtube.com/embed/" + getYouTubeId(submission.videoLink)) as string, type: "video" });
+  if (submission.srcLink !== "") {
+    media.push({ src: ("https://www.youtube.com/embed/" + getYouTubeId(submission.videoLink)) as string, type: "video" });
+  }
 
   submission.media.forEach((image) => {
     media.push({ src: image.url, type: "image" });
