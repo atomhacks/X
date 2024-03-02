@@ -20,13 +20,13 @@ export default async function CreateSubmissionPage() {
     {
       name: "Regular",
       description: "Everyone is automatically registered for the regular track. Do your best to stick to the theme.",
-      prizes: ["Meta Quest 2", "Polaroid Instant Camera", "Anker Power Bank"],
+      prizes: ["Meta Quest", "Polaroid Instant Camera", "Anker Power Bank"],
       value: "GENERAL",
     },
     {
       name: "Beginner",
       description: "Your project will be up against other beginners. All members must be beginners to qualify.",
-      prizes: ["Lava Lamp"],
+      prizes: ["LED Sunset Lamp"],
       value: "BEGINNER",
     },
   ];

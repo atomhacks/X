@@ -68,19 +68,20 @@ model Team {
 }
 
 model Submission {
-  id          String      @id @default(cuid())
-  name        String      @unique
-  description String
-  media       MediaLink[]
-  icon        String      @default("https://static.wikia.nocookie.net/roblox/images/6/66/Content_Deleted.png")
-  tracks      Track[]
-  public      Boolean     @default(false)
-  submitted   Boolean     @default(false)
-  srcLink     String      @default("")
-  videoLink   String      @default("") // Initial video link confused testers
-  upVotes     Int         @default(0)
-  downVotes   Int         @default(0)
-  views       Int         @default(0)
+  id            String      @id @default(cuid())
+  name          String      @unique
+  description   String?      @db.Text
+  media         MediaLink[]
+  icon          String      @default("https://static.wikia.nocookie.net/roblox/images/6/66/Content_Deleted.png")
+  tracks        Track[]
+  public        Boolean     @default(false)
+  submitted     Boolean     @default(false)
+  srcLink       String      @default("")
+  videoLink     String      @default("") // Initial video link confused testers
+  librariesUsed String?      @db.Text
+  upVotes       Int         @default(0)
+  downVotes     Int         @default(0)
+  views         Int         @default(0)
 
   teamId String @unique
   team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)

@@ -9,7 +9,7 @@ import {
 } from "@/lib/server";
 import { NextResponse } from 'next/server';
 
-const fields = ["name", "description", "tracks", "srcLink", "videoLink", "public", "icon", "media", "submitted", "public"] as const;
+const fields = ["name", "description", "tracks", "srcLink", "videoLink", "public", "icon", "media", "submitted", "public", "librariesUsed"] as const;
 
 export async function POST(req: Request) {
   if (req.method != "POST") {

@@ -43,17 +43,23 @@ export default function Hero() {
           Annual Hackathon
         </h2>
         <h2 className="relative bottom-4 text-center">
-          <span style={{ color: colorString }}>
-            March 2nd, 2024
-          </span>
+          <span style={{ color: colorString }}>March 2nd, 2024</span>
         </h2>
         <Link
           href="/register"
           className="m-8 rounded-full px-8 py-3 text-xl"
           style={{ backgroundColor: dimColorString }}
         >
-          Register <ChevronRightIcon className="inline align-middle h-4"></ChevronRightIcon>
+          Register <ChevronRightIcon className="inline h-4 align-middle"></ChevronRightIcon>
         </Link>
+        <a href="https://docs.google.com/spreadsheets/d/1Y9U1IBZvFwFuqXGzBme4mi2jLe_UkiTSY0qHS8v_4C4/edit?usp=sharing">
+          <h2
+            className="relative text-center underline underline-offset-8"
+            style={{ textDecorationColor: colorString }}
+          >
+            Schedule
+          </h2>
+        </a>
       </div>
     </div>
   );

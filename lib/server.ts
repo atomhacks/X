@@ -7,6 +7,8 @@ import DiscordProvider from "next-auth/providers/discord";
 import Email from "next-auth/providers/email";
 import { cache } from "react";
 
+const admins = ["fahimh7@nycstudents.net", "davidw201@nycstudents.net"];
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   pages: {},
@@ -43,6 +45,16 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user: user, account }) {
       if (!user || !account) {
         return;
+      }
+      if (admins.includes(user.email!)) {
+        await prisma.user.update({
+          where: {
+            id: user.id,
+          },
+          data: {
+            role: "ADMIN",
+          },
+        });
       }
       if (account.provider === "discord") {
         await fetch(`https://discord.com/api/v10/applications/${process.env.DISCORD_ID}/role-connections/metadata`, {
@@ -147,6 +159,17 @@ export const getAllSubmissions = async () => {
   return await prisma.submission.findMany({
     include: {
       team: true,
+    },
+  });
+};
+
+export const getAllSubmissionsPublic = async () => {
+  return await prisma.submission.findMany({
+    include: {
+      team: true,
+    },
+    where: {
+      public: true,
     },
   });
 };

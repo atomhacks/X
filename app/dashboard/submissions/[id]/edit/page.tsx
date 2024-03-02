@@ -13,13 +13,14 @@ export default async function SubmissionPage({ params }: { params: { id: string 
     notFound();
   }
 
-  const isMine = submission.team.users.map((member) => member.id).some((id) => id == user.id) ?? false;
+  const isMine =
+    (submission.team.users.map((user) => user.id).some((id) => id == user?.id) ?? false) || user?.role === "ADMIN";
 
   return (
     <>
       {!isMine ? (
         <>
-          <h1>Access Denied Buddy</h1>
+          <h1>Access Denied (you thought you were onto something)</h1>
         </>
       ) : (
         <EditableSubmission submission={submission} />

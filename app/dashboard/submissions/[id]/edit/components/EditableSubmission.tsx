@@ -25,11 +25,23 @@ type Props = {
   }>;
 };
 
+function getYouTubeId(url: string) {
+  var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  var match = url.match(regExp);
+
+  if (match && match[2].length == 11) {
+    return match[2];
+  } else {
+    return "error";
+  }
+}
+
 export default function EditableSubmission({ submission }: Props) {
   const router = useRouter();
   const [name, setName] = useState(submission.name);
-  const [description, setDescription] = useState(submission.description);
+  const [description, setDescription] = useState(submission.description as string);
   const [srcLink, setSrcLink] = useState<string>(submission.srcLink as string);
+  const [librariesUsed, setLibrariesUsed] = useState<string>(submission.librariesUsed as string);
   const [videoLink, setVideoLink] = useState<string>(submission.videoLink as string);
   const [submitting, setSubmitting] = useState(false);
   const [currentImage, _setCurrentImage] = useState(0);
@@ -38,7 +50,6 @@ export default function EditableSubmission({ submission }: Props) {
   const [newImages, setNewImages] = useState<File[]>([]);
   const [selectedImages, setSelectedImages] = useState<string[]>(submission.media.map((sub) => sub.url));
   // public is reserved keyword
-  const [published, setPublished] = useState(submission.public);
   const [submitted, setSubmitted] = useState(submission.submitted);
   const [error, setError] = useState(false);
   const inputFileElement = useRef<null | HTMLInputElement>(null);
@@ -76,16 +87,16 @@ export default function EditableSubmission({ submission }: Props) {
     setError(false);
     console.log(selectedImages);
     console.log(selectedIcon);
-    console.log(published);
     console.log(submitted);
 
     let body: any = {
       name,
       description,
       srcLink,
+      librariesUsed,
       videoLink,
       submitted,
-      public: published,
+      public: submitted,
     };
 
     try {
@@ -147,28 +158,23 @@ export default function EditableSubmission({ submission }: Props) {
 
   return (
     <>
-      <div className="flex h-96 w-full items-center justify-center bg-ocean-100 py-8 sm:h-80">
+      <div className="flex w-full items-center justify-center bg-ocean-100 p-8">
         <button>
           <ArrowLongLeftIcon className="mr-8 h-8 w-8 text-white" onClick={() => setCurrentImage(currentImage - 1)} />
         </button>
-        <div className="relative flex h-full w-2/6 min-w-[600px] flex-col items-center justify-center rounded-xl bg-neutral-900">
+        <div className="relative flex aspect-video w-2/6 items-center justify-center rounded-xl bg-neutral-900">
           <>
             <div className="absolute z-10 flex flex-col items-center justify-center space-y-2">
               <button
                 className="rounded-2xl bg-ocean-500 px-4 py-2 transition duration-200 hover:bg-neutral-600"
                 onClick={() => inputFileElement.current!.click()}
               >
-                Replace Images
+                Add Images
               </button>
             </div>
             <>
               {selectedImages && selectedImages[currentImage] && (
-                <Image
-                  className="absolute rounded-xl object-cover"
-                  src={selectedImages[currentImage]}
-                  fill
-                  alt="image"
-                ></Image>
+                <Image className="rounded-xl object-cover" src={selectedImages[currentImage]} fill alt="image"></Image>
               )}
             </>
           </>
@@ -191,7 +197,7 @@ export default function EditableSubmission({ submission }: Props) {
             onChange={onSelectImages}
           ></input>
           <label className="block text-base text-neutral-400" htmlFor="name">
-            Name * (Required)
+            Name* (A unique and innovative name can make the difference.)
           </label>
           <input
             className="mb-4 block w-full rounded-md bg-ocean-500 p-2 text-5xl font-bold shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-green-500"
@@ -203,7 +209,7 @@ export default function EditableSubmission({ submission }: Props) {
             onInput={(e) => setName((e.target as HTMLInputElement).value)}
           />
           <label className="block text-base text-neutral-400" htmlFor="description">
-            Description * (Required)
+            Description* (Describe your project to everyone.)
           </label>
           <textarea
             className="text-m mb-4 mt-1 block w-full rounded-lg bg-ocean-500 p-2 shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-green-500"
@@ -216,7 +222,7 @@ export default function EditableSubmission({ submission }: Props) {
             onInput={(e) => setDescription((e.target as HTMLInputElement).value)}
           />
           <label className="block text-base text-neutral-400" htmlFor="image">
-            Icon (Optional, the preview image shown in Submission Gallery. For best results, image should be a square)
+            Icon (The preview image shown in the Submission Gallery. For best results, the image should be a square.)
           </label>
           <input
             type="file"
@@ -226,7 +232,7 @@ export default function EditableSubmission({ submission }: Props) {
             onChange={onSelectIcon}
           ></input>
           <label className="mt-4 block text-base text-neutral-400" htmlFor="name">
-            Source Code (Google Drive Link, GitHub repository, etc)
+            Project Link (A link to your project: Replit deployment, Scratch game, etc.)
           </label>
           <input
             className="mb-4 block w-full rounded-md bg-ocean-500 p-2 text-lg shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-green-500"
@@ -237,8 +243,20 @@ export default function EditableSubmission({ submission }: Props) {
             value={srcLink}
             onInput={(e) => setSrcLink((e.target as HTMLInputElement).value)}
           />
+          <label className="mt-4 block text-base text-neutral-400" htmlFor="name">
+            Libraries/APIs/Resources Used (Ex: W3Schools, Discord.py, React, OpenAI API, ChatGPT)
+          </label>
+          <input
+            className="mb-4 block w-full rounded-md bg-ocean-500 p-2 text-lg shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-green-500"
+            type="text"
+            id="src"
+            name="src"
+            autoComplete="off"
+            value={librariesUsed}
+            onInput={(e) => setLibrariesUsed((e.target as HTMLInputElement).value)}
+          />
           <label className="block text-base text-neutral-400" htmlFor="name">
-            Video Link (YouTube)
+            Video Link (Must be a YouTube video.)
           </label>
           <input
             className="mb-6 block w-full rounded-md bg-ocean-500 p-2 text-lg shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-green-500"
@@ -250,28 +268,12 @@ export default function EditableSubmission({ submission }: Props) {
             onInput={(e) => setVideoLink((e.target as HTMLInputElement).value)}
           />
           {videoLink != "" && videoLink != null ? (
-            <iframe className="rounded-3xl" src={videoLink.replace("watch?v=", "embed/")} width={1000} height={500} />
+            <iframe
+              className="aspect-video w-full rounded-md"
+              src={"https://www.youtube.com/embed/" + getYouTubeId(videoLink)}
+              width="100%"
+            />
           ) : null}
-          <Switch.Group>
-            <Switch.Label className="mb-1 block text-base text-neutral-400">Make Public</Switch.Label>
-            <Switch.Description className="mb-2 block text-base text-neutral-400">
-              This will make your project viewable in the submission gallery, but it is not required for your project to
-              be judged and receive a prize.
-            </Switch.Description>
-            <Switch
-              checked={published}
-              onChange={setPublished}
-              className={`${published ? "bg-green-500" : "bg-ocean-500"}
-          relative inline-flex h-[28.5px] w-[55.5px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75`}
-            >
-              <span className="sr-only">Use setting</span>
-              <span
-                aria-hidden="true"
-                className={`${published ? "translate-x-7" : "translate-x-0"}
-            pointer-events-none inline-block h-[26px] w-[26px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
-              />
-            </Switch>
-          </Switch.Group>
           <Switch.Group>
             <Switch.Label className="mb-1 mt-8 block text-base text-cyan-500">Ready for Submission </Switch.Label>
             <Switch.Description className="mb-2 mt-2 text-base text-neutral-400">
