@@ -3,7 +3,6 @@ import { getSubmission, getUserFromRequest } from "../../../../lib/server";
 import EditMenu from "./components/EditMenu";
 import PhotoCarousel from "./components/MediaCarousel";
 import { StaticImageData } from "next/image";
-import { PlayCircleIcon } from "@heroicons/react/24/solid";
 import VercelAd from "../../../../public/ads/vercel.png";
 import Image from "next/image";
 
@@ -75,7 +74,7 @@ export default async function SubmissionPage({ params }: { params: { id: string 
                   className={`flex h-16 w-full items-center justify-center rounded-lg align-bottom ${submission.srcLink ? `bg-green-600` : `bg-red-500`}`}
                 >
                   <a href={url}>
-                    <PlayCircleIcon className="m-auto h-9 w-9" />
+                    <p className="whitespace-pre-line text-base font-normal">Launch</p>
                   </a>
                 </div>
               </div>
