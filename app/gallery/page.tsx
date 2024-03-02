@@ -8,7 +8,7 @@ import NavBar from "../components/nav/NavBar";
 const photos_2023 = [
   "DSC_1045.JPG",
   "DSC_1110.JPG",
-  "DSC_1128.JPG",
+  "DSC_1127.JPG",
   "DSC_1129.JPG",
   "DSC_1130.JPG",
   "DSC_1134.JPG",
@@ -17,6 +17,7 @@ const photos_2023 = [
   "DSC_1146.JPG",
   "DSC_1151.JPG",
   "DSC_1153.JPG",
+  "DSC_1051.JPG",
 ];
 
 const photos_2022 = [
@@ -43,11 +44,8 @@ const photos_2022 = [
   "IMG_8726.JPG",
   "IMG_8729.JPG",
   "IMG_8737.JPG",
-  "IMG_8745.JPG",
   "IMG_8768.JPG",
   "IMG_8771.JPG",
-  "IMG_8772.JPG",
-  "IMG_8774.JPG",
   "IMG_8775.JPG",
   "IMG_8824.JPG",
 ];
@@ -68,10 +66,7 @@ const photos_2019 = [
   "_DSC3836.JPG",
   "_DSC4026.JPG",
   "_DSC4055.JPG",
-  "_DSC4087.JPG",
-  "_DSC4105.JPG",
   "_DSC4152.JPG",
-  "_DSC4408.JPG",
 ];
 
 export default function Gallery() {
