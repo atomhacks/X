@@ -41,6 +41,7 @@ export default function EditableSubmission({ submission }: Props) {
   const [name, setName] = useState(submission.name);
   const [description, setDescription] = useState(submission.description);
   const [srcLink, setSrcLink] = useState<string>(submission.srcLink as string);
+  const [librariesUsed, setLibrariesUsed] = useState<string>(submission.librariesUsed);
   const [videoLink, setVideoLink] = useState<string>(submission.videoLink as string);
   const [submitting, setSubmitting] = useState(false);
   const [currentImage, _setCurrentImage] = useState(0);
@@ -92,6 +93,7 @@ export default function EditableSubmission({ submission }: Props) {
       name,
       description,
       srcLink,
+      librariesUsed,
       videoLink,
       submitted,
       public: submitted,
@@ -240,6 +242,18 @@ export default function EditableSubmission({ submission }: Props) {
             autoComplete="off"
             value={srcLink}
             onInput={(e) => setSrcLink((e.target as HTMLInputElement).value)}
+          />
+          <label className="mt-4 block text-base text-neutral-400" htmlFor="name">
+            Libraries/APIs/Resources Used (Ex: W3Schools, Discord.py, React, OpenAI API, ChatGPT)
+          </label>
+          <input
+            className="mb-4 block w-full rounded-md bg-ocean-500 p-2 text-lg shadow-lg focus:border-teal-600 focus:outline-none focus:ring focus:ring-green-500"
+            type="text"
+            id="src"
+            name="src"
+            autoComplete="off"
+            value={librariesUsed}
+            onInput={(e) => setLibrariesUsed((e.target as HTMLInputElement).value)}
           />
           <label className="block text-base text-neutral-400" htmlFor="name">
             Video Link (Must be a YouTube video.)

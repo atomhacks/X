@@ -71,6 +71,8 @@ export default async function SubmissionPage({ params }: { params: { id: string 
         <div className="my-4 max-w-[1052px] flex-col overflow-auto">
           <h1 className="my-2 text-xl font-bold">Description</h1>
           <p className="whitespace-pre-line text-base font-normal">{submission.description}</p>
+          <h1 className="my-2 text-lg font-bold">Libraries Used:</h1>
+          <p className="whitespace-pre-line text-base font-normal">{submission.librariesUsed}</p>
         </div>
       </div>
     </div>
