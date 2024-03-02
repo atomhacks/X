@@ -3,6 +3,7 @@ import { getSubmission, getUserFromRequest } from "../../../../lib/server";
 import EditMenu from "./components/EditMenu";
 import PhotoCarousel from "./components/MediaCarousel";
 import { StaticImageData } from "next/image";
+import { PlayCircleIcon } from "@heroicons/react/24/solid";
 import VercelAd from "../../../../public/ads/vercel.png";
 import Image from "next/image";
 
@@ -18,14 +19,6 @@ function getYouTubeId(url: string) {
 }
 
 export default async function SubmissionPage({ params }: { params: { id: string } }) {
-  const ads: Array<{ src: StaticImageData; link: string }> = [
-    {
-      src: VercelAd,
-      link: "https://vercel.com",
-    },
-  ];
-
-  const randomAd = ads[Math.floor(Math.random() * ads.length)];
   const user = await getUserFromRequest();
 
   const submission = await getSubmission(params.id);
@@ -44,7 +37,9 @@ export default async function SubmissionPage({ params }: { params: { id: string 
 
   const media: Array<{ src: string; type: string }> = [];
 
-  media.push({ src: ("https://www.youtube.com/embed/" + getYouTubeId(submission.videoLink)) as string, type: "video" });
+  if (submission.srcLink !== "") {
+    media.push({ src: ("https://www.youtube.com/embed/" + getYouTubeId(submission.videoLink)) as string, type: "video" });
+  }
 
   submission.media.forEach((image) => {
     media.push({ src: image.url, type: "image" });
@@ -52,14 +47,6 @@ export default async function SubmissionPage({ params }: { params: { id: string 
 
   return (
     <div className="flex h-full flex-col overflow-auto">
-      <div className="my-4 h-[90px] w-full items-center justify-center">
-        <div className="relative m-auto h-[90px] w-[728px] items-center justify-center">
-          <a href={randomAd.link}>
-            {" "}
-            <Image className="" src={randomAd.src} alt="test object-contain" fill />
-          </a>
-        </div>
-      </div>
       <div className="mx-auto flex flex-col justify-center">
         <div className="flex flex-row justify-center">
           <PhotoCarousel media={media} />
