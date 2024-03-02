@@ -30,7 +30,7 @@ export default function AddUsersModal({ users, closed, disabled, currentLength, 
         });
 
   const setSelectedUsers = (people: any) => {
-    if (people.length + currentLength >= 4) {
+    if (people.length + currentLength > 4) {
       return;
     }
     _setSelectedUsers(people);
@@ -38,7 +38,7 @@ export default function AddUsersModal({ users, closed, disabled, currentLength, 
   };
 
   const onAdd = async () => {
-    if (selectedUsers.length + currentLength >= 4) {
+    if (selectedUsers.length + currentLength > 4) {
       return;
     }
     const body = {
@@ -143,7 +143,7 @@ export default function AddUsersModal({ users, closed, disabled, currentLength, 
                 <div className="mt-4">
                   <SubmitButton
                     loading={disabled}
-                    disabled={disabled || selectedUsers.length == 0 || selectedUsers.length + currentLength >= 4}
+                    disabled={disabled || selectedUsers.length == 0 || selectedUsers.length + currentLength > 4}
                     onClick={() => onAdd()}
                   >
                     Add
