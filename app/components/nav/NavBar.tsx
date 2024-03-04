@@ -3,12 +3,6 @@ import NavBarMobile from "./NavBarMobile";
 
 export const routes = [
   {
-    title: "Dashboard",
-    href: "/dashboard",
-    color: "hover:decoration-blue-500",
-    real: "decoration-blue-500",
-  },
-  {
     title: "Home",
     href: "/",
     color: "hover:decoration-green-400",
@@ -41,29 +35,21 @@ export const routes = [
 ];
 
 export interface Route {
-  title: string,
-  href: string,
-  color: string,
-  real: string,
+  title: string;
+  href: string;
+  color: string;
+  real: string;
 }
 
 export default function NavBar() {
   return (
     <>
       <div className="sticky top-0 z-50 hidden min-w-full gap-x-4 p-4 lg:flex lg:items-center lg:justify-end">
-        {routes.map((route, i) =>
-          i <= 0 ? (
-            <div key={i} className="mr-auto">
-              <NavButton href={route.href} linecolor={route.color}>
-                {route.title}
-              </NavButton>
-            </div>
-          ) : (
-            <NavButton key={i} href={route.href} linecolor={route.color}>
-              {route.title}
-            </NavButton>
-          ),
-        )}
+        {routes.map((route, i) => (
+          <NavButton key={i} href={route.href} linecolor={route.color}>
+            {route.title}
+          </NavButton>
+        ))}
       </div>
       <NavBarMobile />
     </>

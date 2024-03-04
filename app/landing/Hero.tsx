@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
-import FlyingCars from "./FlyingCars"
-import Link from "next/link";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import FlyingCars from "./FlyingCars";
 
 export default function Hero() {
   const [value, setValue] = useState(0);
@@ -22,8 +20,6 @@ export default function Hero() {
   }, [value]);
 
   const colorString = `hsl(${value}, 96%, 66%)`;
-  const dimColorString = `hsl(${value}, 96%, 40%)`;
-
   return (
     <div className="min-h-[80vh]">
       <FlyingCars />
@@ -43,23 +39,8 @@ export default function Hero() {
           Annual Hackathon
         </h2>
         <h2 className="relative bottom-4 text-center">
-          <span style={{ color: colorString }}>March 2nd, 2024</span>
+          <span style={{ color: colorString }}>See You Next Year!</span>
         </h2>
-        <Link
-          href="/register"
-          className="m-8 rounded-full px-8 py-3 text-xl"
-          style={{ backgroundColor: dimColorString }}
-        >
-          Register <ChevronRightIcon className="inline h-4 align-middle"></ChevronRightIcon>
-        </Link>
-        <a href="https://docs.google.com/spreadsheets/d/1Y9U1IBZvFwFuqXGzBme4mi2jLe_UkiTSY0qHS8v_4C4/edit?usp=sharing">
-          <h2
-            className="relative text-center underline underline-offset-8"
-            style={{ textDecorationColor: colorString }}
-          >
-            Schedule
-          </h2>
-        </a>
       </div>
     </div>
   );

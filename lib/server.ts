@@ -28,13 +28,8 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user, account }) {
-      if (!(account || user)) return false;
-
-      console.log(user);
-      console.log(account);
-
-      return true;
+    async signIn() {
+      return false;
     },
     session: ({ session, user }) => ({
       ...session,
