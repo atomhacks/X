@@ -6,4 +6,6 @@ We used a variety of frameworks and libraries. The website was written in TypeSc
 
 Most of the team that worked on this (@frykher, @wd7bxscience) will be graduating Bronx Science in 2024, so this is our last time working at AtomHacks. Thank you for all the fun, and good luck next year!
 
+PS: Yes, @frykher decided we should have our development .env in this repo. We've reset the tokens and urls already, if you're wondering.
+
 - @wd7bxscience
