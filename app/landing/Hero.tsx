@@ -26,19 +26,20 @@ export default function Hero() {
       <div className="flex flex-col items-center justify-center p-8 pt-0">
         <Logo />
         <h1
-          className="relative bottom-10 text-center underline underline-offset-8"
+          className="relative text-center underline bottom-10 underline-offset-8"
           style={{ textDecorationColor: colorString }}
         >
           AtomHacks <span style={{ color: colorString }}>X</span>
         </h1>
-        <h2 className="relative bottom-4 text-center">
+        <h2 className="relative text-center bottom-4">
           Bronx Science&apos;s{" "}
           <span style={{ color: colorString }}>
             10<sup>th</sup>
           </span>{" "}
           Annual Hackathon
         </h2>
-        <h2 className="relative bottom-4 text-center">
+        <h2 className="relative flex flex-col text-center bottom-4">
+          <span style={{ color: colorString }}>Thank You for Joining Us!</span>
           <span style={{ color: colorString }}>See You Next Year!</span>
         </h2>
       </div>

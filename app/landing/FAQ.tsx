@@ -40,9 +40,9 @@ const qas = [
       "Yes, of course! In fact we encourage you to use them to speed up your development process. However, code that is not part of an external library should be your own work.",
   },
   {
-    question: "Am I allowed to use Scratch/Roblox/Unity or any other third party platform?",
+    question: "Am I allowed to use any third party platform such as Scratch/Roblox/Unity, etc?",
     answer:
-      "Yes, you will be able to utilize these technologies so long as the logic/code that you implement is your own.",
+      "Yes, you may utilize any platform in any language that suits your needs, such as Scratch. Remember, the code you implement must be your own.",
   },
   {
     question: "What do I win?",
@@ -53,8 +53,8 @@ const qas = [
 
 export default function FAQ() {
   return (
-    <div id="faq" className="container mx-auto my-8 flex flex-col items-center justify-center gap-4">
-      <h2 className="mr-auto px-4 py-6 text-5xl underline decoration-green-500 decoration-4 underline-offset-8">FAQ</h2>
+    <div id="faq" className="container flex flex-col items-center justify-center gap-4 mx-auto my-8">
+      <h2 className="px-4 py-6 mr-auto text-5xl underline decoration-green-500 decoration-4 underline-offset-8">FAQ</h2>
       <Accordion type="single" collapsible className="w-3/5 text-lg">
         {qas.map((qa, i) => (
           <AccordionItem key={i} value={`item-${i}`}>

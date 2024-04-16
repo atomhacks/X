@@ -5,19 +5,19 @@ import { useEffect, useState, useRef, PropsWithChildren } from "react";
 import flyingCarOne from "@/public/cars/flyingCar1.svg";
 import flyingCarTwo from "@/public/cars/flyingCar2.svg";
 import flyingCarThree from "@/public/cars/flyingCar3.svg";
-import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
 import Image from "next/image";
 
 function WidthSize() {
-  const hasWindow = typeof window !== 'undefined';
+  const hasWindow = typeof window !== "undefined";
   const windowWidth = hasWindow ? window.innerWidth : 0;
   const [currentWidth, setWidth] = useState({ width: windowWidth });
   const prevWidthRef = useRef(currentWidth.width);
 
   useEffect(() => {
     function handleResize() {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         const newWidth = window.innerWidth;
         setWidth((prev) => {
           prevWidthRef.current = prev.width;
@@ -40,7 +40,6 @@ type Props = {
   hover: number[][];
   left?: number;
   right?: number;
-
 };
 
 function FlyCar(props: PropsWithChildren<Props>) {
@@ -52,7 +51,7 @@ function FlyCar(props: PropsWithChildren<Props>) {
   let scaleX = 1;
   let endpoint = width + 210;
 
-  if (props.opposite) {
+  if (!props.opposite) {
     margin = `75px -210px`;
   } else {
     margin = `75px ${width}px`;
@@ -74,7 +73,7 @@ function FlyCar(props: PropsWithChildren<Props>) {
             const newScaleX = currentScaleX === 1 ? -1 : 1;
             gsap.set(carRef.current, { scaleX: newScaleX });
           },
-        })
+        });
 
         if (width !== oldWidth) {
           gsap.set(carRef.current, { x: endpoint });
@@ -101,7 +100,7 @@ function FlyCar(props: PropsWithChildren<Props>) {
         ref={carRef}
         style={{
           transform: `scaleX(${scaleX})`,
-          margin: margin
+          margin: margin,
         }}
         className="relative h-[auto] w-[13rem]"
       >
@@ -109,13 +108,13 @@ function FlyCar(props: PropsWithChildren<Props>) {
         <div className="flex flex-row opacity-0" ref={hoverRef}>
           {props.hover.map((hoverMargin: number[], index) => (
             <svg
-            key={index}
-            className="mt-1 h-[auto] w-[2rem] fill-[#5ccbe5]"
-            viewBox="0 0 40 12"
-            style={{
-              marginLeft: hoverMargin[0],
-              transform: `rotate(${hoverMargin[1]}deg)`,
-            }}
+              key={index}
+              className="mt-1 h-[auto] w-[2rem] fill-[#5ccbe5]"
+              viewBox="0 0 40 12"
+              style={{
+                marginLeft: hoverMargin[0],
+                transform: `rotate(${hoverMargin[1]}deg)`,
+              }}
             >
               <rect y="0" width="40" height="4" rx="1.98" ry="1.98" />
               <rect x="10" y="8" width="20" height="4" rx="1.98" ry="1.98" />
@@ -129,21 +128,12 @@ function FlyCar(props: PropsWithChildren<Props>) {
 
 export default function flyingCars() {
   return (
-    <div className="absolute h-[32rem] viewport-width overflow-hidden">
-      <FlyCar src={flyingCarOne}
-        speed={16}
-        opposite={true}
-        hover={[[50], [50]]}
-      />
+    <div className="viewport-width absolute h-[32rem] overflow-hidden">
+      <FlyCar src={flyingCarOne} speed={16} hover={[[25, 5], [100]]} />
+      <FlyCar src={flyingCarThree} speed={18} hover={[[50], [50]]} />
       <FlyCar
         src={flyingCarTwo}
-        speed={18}
-        hover={[[25, 5], [100]]}
-      />
-      <FlyCar
-        src={flyingCarThree}
         speed={14}
-        opposite={true}
         hover={[
           [9, 3],
           [45, 3],
