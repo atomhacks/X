@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import NavBar from "../components/nav/NavBar";
-
+// Todo: const photos_2024 = [blabla],
 const photos_2023 = [
   "DSC_1045.JPG",
   "DSC_1110.JPG",
@@ -113,8 +113,28 @@ export default function Gallery() {
         </Transition>
         <div className="p-8 text-white">
           <div className="mb-8 flex items-center justify-center">
-            <span className="font-morro underline decoration-green-500 decoration-4 underline-offset-8 py-6 text-7xl md:text-5xl">GALLERY</span>
+            <span className="font-morro py-6 text-7xl underline decoration-green-500 decoration-4 underline-offset-8 md:text-5xl">
+              GALLERY
+            </span>
           </div>
+          {/* Todo: Put images for gallery into public/gallery folder, name them out above, then uncomment this block of code */}
+          {/* <h1 className="mb-3 inline-block border-b-4 border-yellow-500 text-4xl">2024</h1> */}
+          {/* <div className="flex justify-center">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+              {photos_2024.map((photo: string, i: number) => (
+                <Image
+                  className="hover:border-box hover:outline-3 outline-solid box-border cursor-pointer rounded-xl outline-green-500 transition duration-200 hover:outline"
+                  src={`/gallery/2024/${photo}`}
+                  width={620}
+                  height={200}
+                  key={i}
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                  alt={""}
+                  onClick={() => setSelectedImage(`/gallery/2024/${photo}`)}
+                />
+              ))}
+            </div>
+          </div> */}
           <h1 className="mb-3 inline-block border-b-4 border-yellow-500 text-4xl">2023</h1>
           <div className="flex justify-center">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">

@@ -38,9 +38,10 @@ export default function Hero() {
           </span>{" "}
           Annual Hackathon
         </h2>
+        {/* Todo: ____ change to registration google form, Put the date in put the date here*/}
         <h2 className="relative bottom-4 flex flex-col text-center">
-          <span style={{ color: colorString }}>Thank You for Joining Us!</span>
-          <span style={{ color: colorString }}>See You Next Year!</span>
+          <span style={{ color: colorString }}>Please register through ____!</span>
+          <span style={{ color: colorString }}>Put the date here</span>
         </h2>
       </div>
     </div>

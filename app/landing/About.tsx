@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-
+// Todo: Add new images to public / gallery folder
 import empowerImg from "@/public/gallery/2023/DSC_1144.jpg";
 import dreamImg from "@/public/gallery/2023/DSC_1128.jpg";
 import demoImg from "@/public/gallery/2023/DSC_1061.jpg";
@@ -39,10 +39,10 @@ function Section({ img, text }: { img: any; text: string }) {
 
   return (
     <div ref={ref} className="relative my-24 grid snap-center grid-cols-1 md:my-12 md:grid-cols-5 md:px-0">
-      <div className="relative px-4 md:col-span-3 z-10">
+      <div className="relative z-10 px-4 md:col-span-3">
         <Image priority={true} className="relative rounded-2xl shadow-2xl" src={img} alt="" />
       </div>
-      <div className="my-auto text-center md:col-span-2 md:my-4 md:text-right lg:ml-24 z-0">
+      <div className="z-0 my-auto text-center md:col-span-2 md:my-4 md:text-right lg:ml-24">
         <motion.p style={{ y }} className="border-r-8 border-green-500 px-8 py-3 text-xl md:text-base">
           {" "}
           {text}
