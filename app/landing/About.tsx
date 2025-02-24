@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-// Todo: Add new images to public / gallery folder
 import empowerImg from "@/public/gallery/2023/DSC_1144.jpg";
 import dreamImg from "@/public/gallery/2023/DSC_1128.jpg";
 import demoImg from "@/public/gallery/2023/DSC_1061.jpg";

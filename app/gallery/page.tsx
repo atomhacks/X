@@ -4,7 +4,20 @@ import Image from "next/image";
 import { Transition, Dialog } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import NavBar from "../components/nav/NavBar";
-// Todo: const photos_2024 = [blabla],
+const photos_2024 = [
+  "_DSC0860.JPG",
+  "_DSC0883.JPG",
+  "_DSC0927.JPG",
+  "_DSC0935.JPG",
+  "_DSC0945.JPG",
+  "_DSC0960.JPG",
+  "_DSC0987.JPG",
+  "_DSC1008.JPG",
+  "_DSC1042.JPG",
+  "_DSC1051.JPG",
+  "_DSC1111.JPG",
+];
+
 const photos_2023 = [
   "DSC_1045.JPG",
   "DSC_1110.JPG",
@@ -117,9 +130,8 @@ export default function Gallery() {
               GALLERY
             </span>
           </div>
-          {/* Todo: Put images for gallery into public/gallery folder, name them out above, then uncomment this block of code */}
-          {/* <h1 className="mb-3 inline-block border-b-4 border-yellow-500 text-4xl">2024</h1> */}
-          {/* <div className="flex justify-center">
+          <h1 className="mb-3 inline-block border-b-4 border-yellow-500 text-4xl">2024</h1>
+          <div className="flex justify-center">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
               {photos_2024.map((photo: string, i: number) => (
                 <Image
@@ -134,7 +146,7 @@ export default function Gallery() {
                 />
               ))}
             </div>
-          </div> */}
+          </div>
           <h1 className="mb-3 inline-block border-b-4 border-yellow-500 text-4xl">2023</h1>
           <div className="flex justify-center">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
