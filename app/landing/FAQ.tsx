@@ -3,7 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const qas = [
   {
     question: "How long is the event?",
-    answer: "The hackathon lasts from 8 AM to around 7-8 PM",
+    answer: "The hackathon lasts from 8 AM to 8 PM",
   },
   {
     question: "Does participating cost money?",
@@ -47,7 +47,11 @@ const qas = [
   {
     question: "What do I win?",
     answer:
-      "Our top prize is an Oculus Quest! We have several other prizes available for second place and third place, as well as a prize for the best beginner group. However, there will be several freebies throughout the event, including a free T-Shirt and stickers! Check the email that was sent to all Bronx Science students for more details",
+      "Our top prize is a pair of SONY headphones! Our second place prize is an Alexa, and our third place prize is a digital camera. We also have a prize for the best beginner group. However, there will be several freebies throughout the event, including a free T-Shirt and stickers! Check the email that was sent to all Bronx Science students for more details",
+  },
+  {
+    question: "Do I have to be a Bronx Science student to participate?",
+    answer: "Yes, all participants must be current Bronx Science students.",
   },
 ];
 

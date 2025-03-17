@@ -23,7 +23,7 @@ const content = [
   },
   {
     img: foodImg,
-    text: "Don't worry about food. We cater lunch, dinner, and all-day snacks so that you have the energy to innovate and explore during the event!",
+    text: "Don't worry about food. We cater lunch and dinner so that you have the energy to innovate and explore during the event!",
   },
 ];
 
