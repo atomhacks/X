@@ -1,7 +1,5 @@
 "use client";
 
-import Rive from "@rive-app/react-canvas";
-
 export default function Logo() {
   return (
     <div className="relative bottom-8">
