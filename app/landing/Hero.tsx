@@ -38,13 +38,12 @@ export default function Hero() {
           </span>{" "}
           Annual Hackathon
         </h2>
-        {/* Todo: ____ change to registration google form*/}
         <h2 className="relative bottom-4 flex flex-col text-center">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSderb4FIxzqbje5I5xpSoxYkHCSbj6YWP28ZavLwWYUnTfe5A/viewform?usp=dialog">
-            Registration Link
-          </a>
-
-          {/* <span style={{ color: colorString }}>Registration Link: https://docs.google.com/forms/d/e/1FAIpQLSderb4FIxzqbje5I5xpSoxYkHCSbj6YWP28ZavLwWYUnTfe5A/viewform?usp=dialog</span> */}
+          <span style={{ color: colorString }}>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSderb4FIxzqbje5I5xpSoxYkHCSbj6YWP28ZavLwWYUnTfe5A/viewform?usp=dialog">
+              Registration Link
+            </a>
+          </span>
           <span style={{ color: colorString }}>04/26/25</span>
         </h2>
       </div>
