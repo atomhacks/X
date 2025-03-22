@@ -17,11 +17,16 @@ export default function Sponsors() {
         Sponsors
       </h2>
       <h3 className="text-center text-xl">Thank you to our sponsors who made AtomHacks possible!</h3>
-      <div className="grid w-5/6 grid-cols-3 items-center justify-center gap-4 md:grid-cols-1">
-        <div className="relative col-span-full block h-48 items-center justify-center rounded-lg bg-white">
-          <Image className="p-8" src="/sponsors/Untitled design.png" alt="Alumni Association" fill={true} />
-          {/* Todo: Add 2024 gallery images to sponsors folder, copy line 22 and add relative path for src, add className and use the grid thing*/}
-          {/* search grid in tailwind, add a grid w x columns and put images into it, if it doesnt work search width in tailwind and resize the images one by one */}
+      <div className="grid w-5/6 items-center justify-center gap-4 md:grid-cols-1">
+        <div className="relative col-span-full block flex flex h-auto items-center justify-center rounded-lg bg-transparent">
+          <Image
+            className="p-8"
+            src="/sponsors/Untitled design.png"
+            alt="Alumni Association"
+            // fill={true}
+            width={500}
+            height={500}
+          />
         </div>
       </div>
     </div>
