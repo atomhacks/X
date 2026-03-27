@@ -23,7 +23,7 @@ export default function Hero() {
   return (
     <div className="min-h-[80vh]">
       <FlyingCars />
-      <div className="flex flex-col items-center justify-center p-8 pt-0">
+      <div className="relative z-10 flex flex-col items-center justify-center p-8 pt-0">
         <Logo />
         <h1
           className="relative bottom-10 text-center underline underline-offset-8"
@@ -45,6 +45,18 @@ export default function Hero() {
             </a>
           </span>
           <span style={{ color: colorString }}>03/28/26</span>
+          <div className="flex flex-row gap-4 mt-4">
+            <span style={{ color: 'white' }} className="bg-black text-white px-3 py-1 rounded-md">
+              <a href="https://docs.google.com/spreadsheets/d/1RRXsGI64wuv7NO4v_sJYgHS1Euy9JyyNRTgVkQc8-v4/edit?usp=sharing">
+                Schedule
+              </a>
+            </span>
+            <span style={{ color: colorString }} className="bg-black text-white px-3 py-1 rounded-md">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfI3WLcuTIEq5HvV_PkEzB7i_SjLcthlDZXE-Hz9K_jLxjc-Q/viewform?usp=dialog">
+                Submission
+              </a>
+            </span>
+          </div>
         </h2>
       </div>
     </div>
